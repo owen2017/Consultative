@@ -86,6 +86,7 @@ define(['angular'], function (angular) {
 				cmd.sid = $routeParams.sid;					
 				do_ajax.do_post(cmd).then(function(data){
 			    	if(data!=false){
+			    		alert("成功");
 			    		$scope.search("N");
 			    	}
 			  	});

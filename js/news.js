@@ -41,7 +41,7 @@ if(typeof app.news == "undefined") app.news = {};
 			
 			$("[news=time]",_li).html(val["build_time"]);
 			$("[news=title]",_li).html(val["title"]);			
-			$("[news=content]",_li).html(val["content"]);			
+			$("[news=content]",_li).html(val["content"].replace(/\n/g,"<br />"));
 			
 			list.push(_li.prop("outerHTML"));
 		});
