@@ -1,0 +1,73 @@
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+
+<header class="header" ng-include="'html/header/header.html'"></header>
+<main>
+	<aside class="side" ng-include="'html/side/side.html'"></aside>
+
+	<section class="main" ng-controller="feedback">
+		<h1>回饋列表</h1>		
+
+		<div>
+			<input type="text" ng-model="acc" placeholder="諮商師帳號">
+			<input type="text" ng-model="name" placeholder="諮商師姓名">
+			<!--<select ng-model="status">
+				<option value="">狀態</option>
+				<option value="Y">顯示</option>
+				<option value="N">隱藏</option>
+			</select>-->
+
+			<input type="button" value="搜尋" ng-click="search('1')" class="listObject">
+			<table class="listObject">
+				<tr>
+					<th width="3%">#</th>
+					<th width="10%">諮商師帳號</th>
+					<th width="10%">諮商師姓名</th>
+					<th width="36%">留言</th>
+					<!--<th width="7%">狀態</th>-->
+					<th width="19%">時間</th>
+					<th>功能</th>
+				</tr>
+				<tr ng-repeat="(key, value) in list">
+					<td>{{ $index + 1 }}</td>
+					<td>{{ value.account }}</td>
+					<td>{{ value.name }}</td>
+					<td class="dataArticle">
+						{{ value.message }}
+					</td>
+					<!--<td ng-switch on="value.status">
+						<span ng-switch-when="Y">顯示</span>
+						<span ng-switch-when="N">隱藏</span>
+					</td>-->
+					<td>{{ value.builttime }}</td>
+					
+					<td ng-switch on="value.status">					
+						<!--<input type="button" value="顯示" ng-switch-when="N" ng-click="upd_status(value.sn, value.cid, 'Y')">
+						<input type="button" value="隱藏" ng-switch-when="Y" ng-click="upd_status(value.sn, value.cid, 'N')">-->
+						<input type="button" value="刪除" ng-click="del(value.sn, value.cid)">
+					</td>
+				</tr>
+				<tr ng-show="nodata"><td colspan="6">無資料</td></tr>
+			</table>
+		</div>
+		
+		<div class="pageNumber" ng-show="page_ctl">
+			<div class="center">
+				<div class="pageUpDown">
+					<button ng-show="p_page" ng-click="previous()">上一頁</button>
+				</div>
+				<ul>
+					<li ng-repeat="page in page_list" ng-class="{true: 'active', false: 'page'}[isActivePage(page)]" ng-click="change_page(page)">		
+						{{page}}
+					</li>
+				</ul>
+				<div class="pageUpDown">
+					<button ng-show="n_page" ng-click="next()">下一頁</button>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+</main>
+

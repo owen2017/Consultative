@@ -1,0 +1,169 @@
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+
+<header class="header" ng-include="'html/header/header.html'"></header>
+<main>
+	<aside class="side" ng-include="'html/side/side.html'"></aside>
+
+	<section class="main" ng-controller="counselorApply">
+		<h1>諮商師申請</h1>	
+		<select ng-model="status">
+			<option value="">狀態</option>
+			<option value="0">未審核</option>
+			<option value="1">核準</option>
+			<option value="2">拒絕</option>
+		</select>
+		<input type="button" value="搜尋" ng-click="search('1')">	
+
+		<table class="listObject">
+			<tr>
+				<th>#</th>
+				<th>帳號</th>
+				<th>姓名</th>
+				<th>性別（認同)</th>				
+				<th>專業人員同志身分</th>				
+				<th>申請時間</th>
+				<th>狀態</th>
+				<th>審核時間</th>
+				<th class="funcTd">功能</th>
+			</tr>
+			<tr ng-repeat="(key, value) in list">   <!-- | orderBy:'sn' -->
+				<td>{{ $index + 1 }}</td>				
+				<td>{{ value.account }}</td>
+				<td>{{ value.name }}</td>
+				<td>{{ value.gender }}</td>				
+				<td>{{ value.identity }}</td>				
+				<td class="dataArticle">{{ value.apply_time }}</td>		
+				<td ng-switch on="value.status" class="dataText">
+					<span class="statusUnreviewed" ng-switch-when="0">未審核</span>
+					<span class="statusaccepted" ng-switch-when="1">核準</span>
+					<span class="statusrejected" ng-switch-when="2">拒絕</span>
+				</td>
+				<td>{{ value.approve_time }}</td>
+				<td  class="dataButton" ng-switch on="value.status">
+					<a class="feedbackBtn" ng-click="pop_detail($index)">詳細資料</a>
+					<div ng-switch-when="0">						
+						<a class="feedbackBtn" ng-click="approve(value.sn)">核準</a>
+						<a class="feedbackBtn" ng-click="refuse(value.sn)">拒絕</a>
+					</div>
+				</td>
+			</tr>
+			<tr ng-show="nodata"><td colspan="9">無資料</td></tr>
+		</table>
+
+		<div ng-show="show_detail" ng-model="mask"></div>
+		<div ng-show="show_detail" ng-model="detail_list" class="infoWindow">
+			<input type="button" value="關閉" ng-click="close_detail()">
+			<table class="listObject">
+				<tr>
+					<td>專業人員同志身分</td>
+					<td>{{ detail.identity }}</td>
+				</tr>
+				<tr>
+					<td>手機</td>
+					<td>{{ detail.mobile }}</td>
+				</tr>
+				<tr>
+					<td>機構電話</td>
+					<td>{{ detail.phone }}</td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td>{{ detail.email }}</td>
+				</tr>
+				<tr>
+					<td>服務地區</td>
+					<td>{{ detail.area }}</td>
+				</tr>
+				<tr>
+					<td>服務時段</td>
+					<td>{{ detail.office_time }}</td>
+				</tr>
+				<tr>
+					<td>工作場域</td>
+					<td>{{ detail.office_area }}</td>
+				</tr>
+				<tr>
+					<td>職稱</td>
+					<td>{{ detail.job }}</td>
+				</tr>
+				<tr>
+					<td>可服務地點</td>
+					<td>{{ detail.service_area }}</td>
+				</tr>
+				<tr>
+					<td>可服務對象</td>
+					<td>{{ detail.serviceobj }}</td>
+				</tr>
+				<tr>
+					<td>服務對象限制</td>
+					<td>{{ detail.serviceLimit }}</td>
+				</tr>
+				<tr>
+					<td>收費標準</td>
+					<td>{{ detail.charges }}</td>
+				</tr>
+				<tr>
+					<td>修課及訓練</td>
+					<td>{{ detail.training }}</td>
+				</tr>
+				<tr>
+					<td>服務同志實務經歷</td>
+					<td>{{ detail.experience }}</td>
+				</tr>
+				<tr>
+					<td>接案次數</td>
+					<td>{{ detail.case_times }}</td>
+				</tr>
+				<tr>
+					<td>學歷</td>
+					<td>{{ detail.education }}</td>
+				</tr>
+				<tr>
+					<td>證照</td>
+					<td>{{ detail.license }}</td>
+				</tr>
+				<tr>
+					<td>證照證號</td>
+					<td>{{ detail.license_num }}</td>
+				</tr>
+				<tr>
+					<td>專長</td>
+					<td>{{ detail.specialty }}</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td>我認為同志面對的困擾大部分與非同志是類似的</td>
+					<td>
+						{{ detail.idea1 }}
+					</td>
+				</tr>
+				<tr>
+					<td>我理解同志在某些特定情境可能面臨與非同志不同的處境</td>
+					<td>
+						{{ detail.idea2 }}
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="pageNumber" ng-show="page_ctl">
+			<div class="center">
+				<div class="pageUpDown">
+					<button ng-show="p_page" ng-click="previous()">上一頁</button>
+				</div>
+				<ul>
+					<li ng-repeat="page in page_list" ng-class="{true: 'active', false: 'page'}[isActivePage(page)]" ng-click="change_page(page)">		
+						{{page}}
+					</li>
+				</ul>
+				<div class="pageUpDown">
+					<button ng-show="n_page" ng-click="next()">下一頁</button>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+</main>
+
+

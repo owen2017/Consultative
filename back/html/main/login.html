@@ -1,0 +1,17 @@
+<section class="bg">
+	<div ng-controller="do_login" class="loginGroup">
+		<h1>同志諮商專業人員網</h1>
+		<label>
+			<input type="text" ng-model="acc" placeholder="帳號">
+		</label>
+		<label>
+			<input type="password" ng-hide="chg_pwd" ng-model="pwd" placeholder="密碼">
+			<input type="text" ng-show="chg_pwd" ng-model="pwd" placeholder="密碼">
+			<input type="checkbox" ng-model="chg_pwd">
+		</label>
+		<input type="button" value="登入"  ng-click="login()">
+	</div>
+</section>
+
+
+

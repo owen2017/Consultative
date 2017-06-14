@@ -1,0 +1,96 @@
+<script src="js/select.js"></script>
+<script src="js/search.js"></script>
+<script src="js/visitor.js"></script>
+<script src="js/popwin.js"></script>
+<script src="js/objTrans.js"></script>
+<script src="js/top.js"></script>
+<script src="js/main.js"></script>
+
+<main>
+	<header>
+		<h1>同志<i>諮商</i><b>專業人員</b>網</h1>
+		<section class="search">
+
+			<select name="main_sel">
+				<option value="">分類</option>
+				<option value="name">姓名</option>
+				<option value="area">地區</option>
+				<option value="specialty">專長</option>
+			</select>
+
+			<!-- 姓名 -->
+			<div sub_sel="name">
+				<input type="text" placeholder="請輸入諮商師姓名">
+			</div>
+
+			<!-- 地區 -->
+			<div sub_sel="area">
+				<select>
+					<option value="">分類</option>
+				</select>
+				<!-- 選擇的地區(多選) -->
+				<span name="area_opts"></span>
+				<a name="clear_area">✖</a>
+			</div>
+			
+			<!-- 專長 -->
+			<div sub_sel="specialty">
+				<select></select>
+			</div>
+
+			<input type="button" name="search" value="搜尋">
+		</section>
+	</header>
+
+	<span name="visitor"></span>
+
+	<!-- 主選單 -->
+	<nav>
+		<ul>
+			<!-- <li>我想找諮商人員</li> -->
+			<li popwin="about">關於本網站</li>
+			<li popwin="search">如何找人員</li>
+			<li popwin="news">最新消息</li>
+			<li popwin="platform">聯絡平台</li>
+			<li popwin="login">我是專業人員</li>
+		</ul>
+	</nav>
+	
+	<!-- 遮罩 -->
+	<div class="mask" name="mask"></div>
+
+	<!-- 錯誤顯示窗 -->
+	<div class="errorTip" name="popwin_errmsg"></div>
+
+	<!-- HTML顯示窗 -->
+	<div class="popUp" name="popwin_html" style="display: none;">
+		<span popwin="popwin_close" title="關閉" class="closePopUp">✖</span>
+		<div name="showHTML"></div>
+	</div>
+
+	<!-- 諮商師列表 -->
+	<section class="list">
+		<ul list="ul">
+			<li list="li" style="display: none;"> <!-- style="display: none;" -->
+				<article>					
+					<section class="counselorName">
+						<h2 list="area"></h2>
+						<h1 list="name"></h1>
+						<div><span>專長</span> <p list="specialty"></p></div>
+						<div><span>證照</span> <p list="license"></p></div>
+					</section>
+					<section class="counselorInfo">
+						<div class="bright" list="star"></div>
+						<b></b>
+						<input type="button" list="feeback" popwin="feedback" value="我要回饋" class="feedbackBtn">
+						<input type="button" list="contact" popwin="contact" value="我要諮商">
+					</section>
+				</article>
+			</li>
+		</ul>
+	</section>
+
+	<div name="top" style="z-index: 10; display: block; bottom: 0px; width: 30px; height: 40px; position: absolute; right: 25px; cursor: pointer;">
+		Top
+	</div>
+</main>

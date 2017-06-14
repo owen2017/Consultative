@@ -1,0 +1,15 @@
+<header class="header" ng-include="'html/header/header.html'"></header>
+<main>
+	<aside class="side" ng-include="'html/side/side.html'"></aside>
+
+	<section class="main" ng-controller="editPwd">
+		<h1>修改密碼</h1>	
+		<input type="password" ng-model="old_pwd" placeholder="舊密碼"><br><br>
+		<input type="password" ng-model="new_pwd" placeholder="新密碼"><br><br>
+		<input type="password" ng-model="new_pwd2" placeholder="再次輸入新密碼"><br><br>
+
+		<input type="button" value="送出" ng-click="submit()">
+	</section>
+</main>
+
+

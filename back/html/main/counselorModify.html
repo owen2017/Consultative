@@ -1,0 +1,85 @@
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+
+<header class="header" ng-include="'html/header/header.html'"></header>
+<main>
+	<aside class="side" ng-include="'html/side/side.html'"></aside>
+
+	<section class="main" ng-controller="counselorModify">
+		<h1>諮商師修改申請</h1>		
+
+		<div>
+			<input type="text" ng-model="acc" placeholder="帳號">
+			<select ng-model="status">
+				<option value="">狀態</option>
+				<option value="0">未審核</option>
+				<option value="1">核準</option>
+				<option value="2">拒絕</option>
+			</select>
+
+			<span width="100"></span>
+
+			<input type="button" value="搜尋" ng-click="search('1')">
+
+			<table class="listObject">
+				<tr>
+					<th>#</th>
+					<th>帳號</th>
+					<th>修改類型</th>
+					<th>原資料</th>
+					<th>修改為</th>
+					<th>狀態</th>
+					<th>功能</th>
+				</tr>
+				<tr ng-repeat="(key, value) in list">
+					<td>{{ $index + 1 }}</td>
+					<td>{{ value.account }}</td>
+					<td>{{ value.type }}</td>
+					<td ng-switch on="value.type">{{ value.oldData }}</td>
+					<td ng-switch on="value.type">{{ value.newData }}</td>
+					<td ng-switch on="value.status">
+						<span ng-switch-when="0">未審核</span>
+						<span ng-switch-when="1">核準</span>
+						<span ng-switch-when="2">拒絕</span>
+					</td>
+					
+					<td ng-switch on="value.status">
+						<div ng-switch-when="0">
+							<input type="button" value="核準" ng-click="approve(value.sn)">
+							<input type="button" value="拒絕" ng-click="refuse(value.sn)">
+						</div>
+					</td>
+				</tr>
+				<tr ng-show="nodata"><td colspan="7">無資料</td></tr>
+			</table>
+		</div>
+		
+		<div class="pageNumber" ng-show="page_ctl">
+			<div class="center">
+				<div class="pageUpDown">
+					<button ng-show="p_page" ng-click="previous()">上一頁</button>
+				</div>
+			<ul>
+			<li ng-repeat="page in page_list" ng-class="{true: 'active', false: 'page'}[isActivePage(page)]" ng-click="change_page(page)">		
+				{{page}}
+			</li>
+			</ul>
+				<div class="pageUpDown">
+					<button ng-show="n_page" ng-click="next()">下一頁</button>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="div_pop_connect" align="center" class="infoWindow">
+			<table>			
+				<tr><td>手機</td><td>{{ pop_mobile }}</td></tr>
+				<tr><td>E-Mail</td><td>{{ pop_email }}</td></tr>
+				<tr><td>地址</td><td>{{ pop_address }}</td></tr>
+			<table>
+			</div>
+			<input type="button" ng-click="close_pop_connect()" value="關閉">
+		</div>
+	</section>
+</main>
+
+
+

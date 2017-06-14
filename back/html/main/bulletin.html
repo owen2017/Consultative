@@ -1,0 +1,83 @@
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+
+<header class="header" ng-include="'html/header/header.html'"></header>
+<main>
+	<aside class="side" ng-include="'html/side/side.html'"></aside>
+
+	<section class="main" ng-controller="bulletin">
+		<h1>公告列表</h1>	
+
+		<div ng-hide="window_enable">
+		
+			<input type="button" value="新增" ng-click="ctl_window('N')">	
+			
+			<select ng-model="sel_enable">
+				<!-- <option value="">狀態</option> -->
+				<option value="Y">啟用</option>
+				<option value="N">停用</option>
+			</select>
+			
+			<input type="button" value="搜尋" ng-click="search('N')">	
+
+			<table class="listObject">
+				<tr>
+					<th>#</th>
+					<th>標題</th>
+					<th>內容</th>
+					<th>狀態</th>
+					<th>建立時間</th>
+					<th>備註</th>
+					<th>操作IP</th>
+					<th>功能</th>
+				</tr>
+				<tr ng-repeat="(key, value) in list | orderBy:'sn'">
+					<td>{{ $index + 1 }}</td>
+					<td class="dataArticle">{{ value.title }}</td>
+					<td class="dataArticle">{{ value.content }}</td>
+					<td ng-switch on="value.enable">
+						<span ng-switch-when="Y">啟用</span>
+						<span ng-switch-when="N">停用</span>
+					</td>
+					<td>{{ value.build_time }}</td>
+					<td>{{ value.remark }}</td>
+					<td>{{ value.op_IP }}</td>
+					<td>
+						<input type="button" value="修改" ng-click="ctl_window(value.sn)">
+						<input type="button" value="刪除" ng-click="del(value.sn)">
+					</td>
+				</tr>
+				<tr ng-show="nodata"><td colspan="8">無資料</td></tr>
+			</table>
+		</div>
+
+
+		<div ng-show="window_enable" class="editPage">
+			<div>
+				<input type="text" ng-model="sn" placeholder="編號">
+			</div>
+			<div>
+				<input type="text" ng-model="title" placeholder="標題">
+			</div>
+			<div>
+				<textarea cols="50" rows="5" ng-model="content" placeholder="內容"></textarea>
+			</div>
+			<div>
+				<select ng-model="enable" placeholder="狀態">
+					<option value="Y">啟用</option>
+					<option value="N">停用</option>
+				</select>
+			</div>
+			<div>
+				<input type="text" ng-model="remark" placeholder="備註">
+			</div>
+			<div>
+				<input type="button" value="取消" ng-click="ctl_window('N')">	
+				<input type="button" value="送出" ng-show="submit_type" ng-click="submit('ins')">	
+				<input type="button" value="送出" ng-hide="submit_type" ng-click="submit('upd')">
+			</div>
+		</div>
+	</section>
+</main>
+
+
+

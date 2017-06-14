@@ -1,0 +1,39 @@
+<div ng-controller="side_page">
+	<div class="subtitle">
+		<p>後台管理系統</p>
+	</div>
+
+	<!-- <h1>諮商師</h1> -->
+	<ul>
+		<li ng-hide="side_counselorList" ng-click="click_counselorList"><a href="#/counselorList/{{sid}}/">諮商師列表</a></li>
+		<li ng-show="side_counselorList" class="active" ng-click="click_counselorList"><a href="#/counselorList/{{sid}}/">諮商師列表</a></li>
+
+		<li ng-hide="side_counselorApply" ng-click="click_counselorApply"><a href="#/counselorApply/{{sid}}/">諮商師申請</a></li>
+		<li ng-show="side_counselorApply" class="active" ng-click="click_counselorApply"><a href="#/counselorApply/{{sid}}/">諮商師申請</a></li>
+
+		<li ng-hide="side_counselorModify" ng-click="click_counselorModify"><a href="#/counselorModify/{{sid}}/">諮商師修改申請</a></li>
+		<li ng-show="side_counselorModify" class="active" ng-click="click_counselorModify"><a href="#/counselorModify/{{sid}}/">諮商師修改申請</a></li>
+		
+	</ul>
+
+	<!-- <h1>訪客回饋</h1> -->
+	<ul>	
+		<li ng-hide="side_feedback" ng-click="click_feedback"><a href="#/feedback/{{sid}}/">回饋列表</a></li>
+		<li ng-show="side_feedback" class="active"  ng-click="click_feedback"><a href="#/feedback/{{sid}}/">回饋列表</a></li>
+	</ul>
+
+	<!-- <h1>公告欄</h1> -->
+	<ul>	
+		<li ng-hide="side_bulletin" ng-click="click_bulletin"><a href="#/bulletin/{{sid}}/">公告列表</a></li>
+		<li ng-show="side_bulletin" class="active" ng-click="click_bulletin"><a href="#/bulletin/{{sid}}/">公告列表</a></li>
+	</ul>
+	<!-- <h1>管理員</h1> -->
+	<ul>
+		<li ng-hide="side_editPwd" ng-click="click_editPwd"><a ng-href="#/editPwd/{{sid}}/">修改密碼</a></li>
+		<li ng-show="side_editPwd" class="active" ng-click="click_editPwd"><a ng-href="#/editPwd/{{sid}}/">修改密碼</a></li>
+	</ul>
+</div>
+
+
+
+

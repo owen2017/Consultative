@@ -1,0 +1,190 @@
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+
+<header class="header" ng-include="'html/header/header.html'"></header>
+<main>
+	<aside class="side" ng-include="'html/side/side.html'"></aside>
+
+	<section class="main" ng-controller="counselorList">
+		<h1>諮商師列表</h1>		
+
+		<div class="searchBar">
+			<input type="text" ng-model="acc" placeholder="帳號">
+			<input type="text" ng-model="name" placeholder="姓名">
+			<select ng-model="area">
+				<option value="">地區</option>
+				<option ng-repeat="(key, value) in areas" value="{{value.city}}">{{value.city}}</option>
+			</select>
+			<select ng-model="satisfaction">
+				<option value="">滿意度</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>		
+			<select ng-model="enable">
+				<option value="">狀態</option>
+				<option value="Y">啟用</option>
+				<option value="N">停用</option>
+			</select>
+			<input type="button" value="搜尋" ng-click="search('1')">	
+
+			<table class="listObject">
+				<tr>
+					<th>#</th>
+					<th>帳號</th>
+					<th>密碼</th>
+					<th>姓名</th>
+					<th>地區</th>
+					<th>年資</th>
+					<th>滿意度</th>
+					<th>點擊數</th>
+					<th>狀態</th>
+					<th class="funcTd">功能</th>
+				</tr>
+				<tr ng-repeat="(key, value) in list">
+					<td>{{ $index + 1 }}</td>
+					<td>{{ value.account }}</td>
+					<td>{{ value.password }}</td>
+					<td>{{ value.name }}</td>					
+					<td>{{ value.area }}</td>					
+					<td>{{ value.seniority }}</td>
+					<td ng-click="edit_satisfaction($index, value.satisfaction)">
+						<a href="" class="satisEdit"> {{ value.satisfaction }} </a>
+					</td>
+					<td>{{ value.click }}</td>
+					<td ng-switch on="value.enable">
+						<span ng-switch-when="Y">啟用</span>
+						<span ng-switch-when="N">停用</span>
+					</td>
+					<td>
+						<span ng-switch on="value.enable">
+							<a class="feedbackBtn" ng-switch-when="N" ng-click="upd_status(value.sn,'Y')">啟用</a>
+							<a class="feedbackBtn" ng-switch-when="Y" ng-click="upd_status(value.sn,'N')">停用</a>
+						</span>
+						<a class="feedbackBtn" href="#/feedback/{{sid}}/{{value.account}}">回饋列表</a>
+						<a class="feedbackBtn" ng-click="pop_detail($index)">詳細資料</a>
+					</td>
+				</tr>
+				<tr ng-show="nodata"><td colspan="10">無資料</td></tr>
+			</table>
+		</div>
+		
+		<div class="pageNumber" ng-show="page_ctl">
+			<div class="center">
+				<div class="pageUpDown">
+					<button ng-show="p_page" ng-click="previous()">上一頁</button>
+				</div>
+				<ul>
+					<li ng-repeat="page in page_list" ng-class="{true: 'active', false: 'page'}[isActivePage(page)]" ng-click="change_page(page)">		
+						{{page}}
+					</li>
+				</ul>
+				<div class="pageUpDown">
+					<button ng-show="n_page" ng-click="next()">下一頁</button>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="div_pop_satisfaction" class="popUp" align="center">
+			<div>	 		
+				<select ng-model="upd_satisfaction">
+				<option value="">滿意度</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			</div>
+			<input type="button" ng-click="do_upd_satisfaction()" value="修改">
+			<input type="button" ng-click="close_satisfaction()" value="取消">
+		</div>
+
+		<div ng-show="show_detail" ng-model="mask"></div>
+		<div ng-show="show_detail" ng-model="detail_list" class="infoWindow">
+			<input type="button" value="關閉" ng-click="close_detail()">
+			<table class="listObject">
+				<tr>
+					<td>專業人員同志身分</td>
+					<td>{{ detail.identity }}</td>
+				</tr>
+				<tr>
+					<td>手機</td>
+					<td>{{ detail.mobile }}</td>
+				</tr>
+				<tr>
+					<td>機構電話</td>
+					<td>{{ detail.phone }}</td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td>{{ detail.email }}</td>
+				</tr>
+				<tr>
+					<td>服務地區</td>
+					<td>{{ detail.area }}</td>
+				</tr>
+				<tr>
+					<td>服務時段</td>
+					<td>{{ detail.office_time }}</td>
+				</tr>
+				<tr>
+					<td>工作場域</td>
+					<td>{{ detail.office_area }}</td>
+				</tr>
+				<tr>
+					<td>職稱</td>
+					<td>{{ detail.job }}</td>
+				</tr>
+				<tr>
+					<td>可服務地點 :</td>
+					<td>{{ detail.service_area }}</td>
+				</tr>
+				<tr>
+					<td>可服務對象</td>
+					<td>{{ detail.serviceobj }}</td>
+				</tr>
+				<tr>
+					<td>服務對象限制</td>
+					<td>{{ detail.serviceLimit }}</td>
+				</tr>
+				<tr>
+					<td>收費標準</td>
+					<td>{{ detail.charges }}</td>
+				</tr>
+				<tr>
+					<td>修課及訓練</td>
+					<td>{{ detail.training }}</td>
+				</tr>
+				<tr>
+					<td>服務同志實務經歷</td>
+					<td>{{ detail.experience }}</td>
+				</tr>
+				<tr>
+					<td>接案次數</td>
+					<td>{{ detail.case_times }}</td>
+				</tr>
+				<tr>
+					<td>學歷</td>
+					<td>{{ detail.education }}</td>
+				</tr>
+				<tr>
+					<td>證照</td>
+					<td>{{ detail.license }}</td>
+				</tr>
+				<tr>
+					<td>證照證號</td>
+					<td>{{ detail.license_num }}</td>
+				</tr>
+				<tr>
+					<td>專長</td>
+					<td>{{ detail.specialty }}</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+</main>
+
+
+

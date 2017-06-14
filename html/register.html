@@ -1,0 +1,195 @@
+<script src="js/register.js"></script>
+<script src="js/check.js"></script>
+
+<main class="counselorWindow">
+	
+	<h1>諮商師申請</h1>
+
+	<section class="counselorApply popUpContent">
+
+		<div>			
+			<h4> 帳號 </h4>
+			<input type="text" apply="account" placeholder="請輸入帳號">
+			<!-- <p class="helpTip">*英數混和 8~16碼</p> -->
+		</div>
+
+		<div>			
+			<h4> 密碼 </h4>
+			<input type="password" apply="password" placeholder="請輸入密碼">
+			<!-- <p class="helpTip">*英數混和 8~16碼</p> -->
+		</div>
+
+		<div>			
+			<h4> 相同密碼 </h4>
+			<input type="password" apply="password2" placeholder="請再次輸入密碼">
+			<p class="helpTip">*需和密碼相同</p>
+		</div>
+
+		<div>			
+			<h4> 姓名 </h4>
+			<input type="text" apply="name" placeholder="請輸入姓名">
+		</div>			
+		
+		<div>			
+			<h4> 性別（認同）</h4>
+			<input type="radio" apply="gender" name="gender" value="男" checked>男
+			<input type="radio" apply="gender" name="gender" value="女">女
+			<input type="radio" apply="gender" name="gender" value="其他">其他
+		</div>
+		
+		<div>			
+			<h4> 專業人員同志身分 </h4>
+			<input type="text" apply="identity" placeholder="">
+			(性傾向、性別認同或其他同志認同)
+		</div>		
+
+		<div>			
+			<h4> 手機 </h4>
+			<input type="text" apply="mobile" placeholder="請輸入手機">
+		</div>
+
+		<div>
+			<h4> 機構電話 </h4>
+			<input type="text" apply="phone" placeholder="請輸入機構電話">
+		</div>
+
+		<div>
+			<h4> E-mail </h4>
+			<input type="text" apply="email" placeholder="請輸入E-mail">
+		</div>
+
+		<div register="area">
+			<h4> 服務地區 </h4>
+			<span style="display: none;">
+				<input type="checkbox" chkbox="area">
+				<span></span>
+			</span>
+			<div></div>
+		</div>
+
+		<div>			
+			<h4> 服務時段 </h4>
+			<input type="text" apply="office_time" placeholder="請輸入服務時段">
+		</div>
+
+		<div register="office_area">			
+			<h4> 工作場域 </h4>
+			<span style="display: none;">
+				<input type="checkbox" chkbox="office_area">
+				<span></span>
+			</span>		
+			<div></div>			
+			<input type="checkbox" chkbox="office_area" key="other">
+			<input type="text" other="office_area" placeholder="其他">
+		</div>	
+
+		<div>
+			<h4> 職稱 </h4>
+			<input type="text" apply="job" placeholder="請輸入職稱">
+		</div>
+
+		<div>
+			<h4> 可服務地點 </h4>
+			<input type="text" apply="service_area" placeholder="請輸入可服務地點">
+		</div>
+
+		<div register="serviceobj">
+			<h4> 可服務對象 </h4>		
+			<span style="display: none;">
+				<input type="checkbox" chkbox="serviceobj">
+				<span></span>
+			</span>		
+			<div></div>
+		</div>		
+
+		<div>
+			<h4> 服務對象限制 </h4>
+			<input type="text" apply="serviceLimit" placeholder="請輸入服務對象限制">
+		</div>
+
+		<div>
+			<h4> 收費標準 </h4>
+			<input type="radio" apply="charges" name="charges" value="收費" checked>收費
+			<input type="radio" apply="charges" name="charges" value="免費">免費
+		</div>
+
+		<div>
+			<h4> 年資 </h4>
+			<input type="text" apply="seniority" placeholder="請輸入年資">
+		</div>
+
+		<div register="training" br="Y">
+			<h4> 修課及訓練 </h4>
+			<span style="display: none;">
+				<input type="checkbox" chkbox="training">
+				<span></span>
+			</span>		
+			<div></div>
+			<input type="checkbox" chkbox="training" key="other">
+			<input type="text" other="training" placeholder="其他">
+			(修課及訓練，若多於一項請用，隔開)
+		</div>
+
+		<div>
+			<h4> 服務同志實務經歷 </h4>
+			<input type="text" apply="experience" placeholder="請輸入服務同志實務經歷">
+		</div>
+
+		<div>
+			<h4> 接案次數 </h4>
+			<input type="text" apply="case_times" placeholder="請輸入接案次數">
+		</div>
+
+		<div>
+			<h4> 學歷 </h4>
+			<input type="text" apply="education" placeholder="請輸入學歷">
+		</div>
+
+		<div register="license">				
+			<h4> 相關證照 </h4>
+			<span style="display: none;">
+				<input type="checkbox" chkbox="license">
+				<span></span>
+			</span>		
+			<div></div>
+			<input type="checkbox" chkbox="license" key="other">
+			<input type="text" other="license" placeholder="其他"> 
+		</div>
+
+		<div>
+			<h4> 證照證號 </h4>
+			<input type="text" apply="license_num" placeholder="請輸入證照證號">
+		</div>
+
+		<div register="specialty" br="Y">
+			<h4>同志諮商領域專長</h4>				
+			<span style="display: none;">
+				<input type="checkbox" chkbox="specialty">
+				<span></span>
+			</span>		
+			<div></div>
+			<h4>一般專長</h4>
+			<textarea  other="specialty" cols="45" rows="3" placeholder="請輸入您的諮商專長，若多於一項請用，隔開"></textarea>
+		</div>
+
+		<div>
+			<h4>我對同志諮商的想法</h4>				
+			<div>我認為同志面對的困擾大部分與非同志是類似的</div>
+			<input type="radio" name="idea1" apply="idea1" value="是" checked>是
+			<input type="radio" name="idea1" apply="idea1" value="否">否
+			<div>我理解同志在某些特定情境可能面臨與非同志不同的處境</div>
+			<input type="radio" name="idea2" apply="idea2" value="是" checked>是
+			<input type="radio" name="idea2" apply="idea2" value="否">否
+		</div>
+
+		<div>
+			<section class="center">
+				<input type="button" register="do_register" value="申請">
+			</section>
+		</div>
+	</section>
+	
+
+	
+	
+</main>

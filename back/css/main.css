@@ -1,0 +1,315 @@
+@charset "UTF-8";
+@import url("reset.css");
+/*@import url(//fonts.googleapis.com/earlyaccess/cwtexhei.css);*/
+/*$mainColor: #ef8136;
+$hoverColor: #f9d2b8;
+$fontColor: #d0d0d0;
+$blackColor: #170b02;*/
+body {
+  font-family: '微軟正黑體','cwTeXHei', Arial, sans-serif, helvetica;
+  background-color: #e0e0e0; }
+  body * {
+    outline: none; }
+  body select, body input, body button, body textarea {
+    border-color: transparent;
+    color: white;
+    padding: 0 14px;
+    font-size: 14px;
+    line-height: 43px; }
+  body select {
+    width: 179px;
+    height: 47px;
+    background: url(../../img/select.png) no-repeat;
+    background-size: 20%;
+    background-position: 90%; }
+  body input[type=text], body input[type=password] {
+    line-height: 47px; }
+  body select, body input[type=text], body input[type=password], body textarea {
+    background-color: #a5a5a5;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: none;
+    resize: none; }
+  body button, body input[type=button], body a.feedbackBtn {
+    background-color: #31943c;
+    cursor: pointer;
+    transition: background-color .5s, color .5s;
+    -webkit-transition: background-color .5s, color .5s; }
+    body button:hover, body input[type=button]:hover, body a.feedbackBtn:hover {
+      background-color: #44ca2f;
+      color: #011c0a; }
+  body .bg {
+    background: url(../../img/main_bg.jpg) no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #fff; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #fff; }
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #fff; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #fff; }
+
+.loginGroup {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -175px 0 0 -175px;
+  background-color: #fff;
+  box-shadow: 3px 3px 16px black;
+  border-bottom: 5px solid #31943c;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  /*&::after {
+  	content:' ';		
+  	border-width: 10px;
+  	border-style: solid;
+  	border-color: transparent $mainColor $mainColor transparent;
+  	display:block;
+  	width:0;
+  	float:right;
+  	margin-right:5px;
+  }*/ }
+  .loginGroup h1 {
+    margin: 36px 0;
+    text-align: center;
+    color: #31943c; }
+    .loginGroup h1::after {
+      content: ' ';
+      width: 24px;
+      height: 7px;
+      background-color: #31943c;
+      display: block;
+      margin: 16px auto 0; }
+  .loginGroup label {
+    width: 280px;
+    margin: 30px auto;
+    display: block;
+    position: relative; }
+    .loginGroup label input[type=text], .loginGroup label input[type=password] {
+      width: 248px; }
+    .loginGroup label input[type=checkbox] {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      width: 25px;
+      height: 25px;
+      background: url(../../img/eye.png) no-repeat;
+      -webkit-appearance: none;
+      background-size: 200%;
+      cursor: pointer; }
+      .loginGroup label input[type=checkbox]:hover {
+        opacity: .7; }
+      .loginGroup label input[type=checkbox]:checked {
+        background-position: right top; }
+  .loginGroup input[type=button] {
+    width: 100px;
+    margin: 40px auto 4px;
+    display: block; }
+
+header {
+  /*display:none;*/
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  line-height: 47px;
+  background-color: #44ca2f; }
+  header h1 {
+    color: #fff;
+    font-size: 17px;
+    width: 240px;
+    text-align: center;
+    float: left;
+    /*&::after{
+    	content:' ';
+    	width:24px;
+    	height:7px;
+    	background-color: $mainColor;
+    	display:block;
+    	margin:0 auto;
+    }*/ }
+  header .logoutBtn {
+    float: right; }
+
+main {
+  position: absolute;
+  top: 47px;
+  height: 100vh;
+  width: 100%; }
+  main aside {
+    background-color: #f2f2f2;
+    width: 240px;
+    float: left;
+    height: 99vh;
+    padding-top: 1vh;
+    position: fixed; }
+    main aside .subtitle {
+      margin: 8px 0 28px;
+      color: #ed1d79;
+      text-align: center; }
+      main aside .subtitle p {
+        font-size: 14px; }
+      main aside .subtitle::after {
+        content: ' ';
+        width: 24px;
+        height: 7px;
+        background-color: #ed1d79;
+        display: block;
+        margin: 13px auto 0; }
+    main aside ul {
+      background-color: #31943c; }
+      main aside ul:nth-child(2) {
+        border-top: 2px solid #001f00; }
+      main aside ul li {
+        border-bottom: 2px solid #001f00;
+        text-align: center;
+        height: 50px; }
+        main aside ul li a {
+          line-height: 50px;
+          display: block;
+          color: #001f00;
+          background-color: #f2f2f2;
+          transition: background-color .5s; }
+        main aside ul li:hover a {
+          background-color: #44ca2f; }
+        main aside ul li.active {
+          pointer-events: none; }
+          main aside ul li.active a {
+            color: #011c0a;
+            border-top-right-radius: 25px; }
+  main section.main {
+    width: calc(100% - 272px);
+    float: left;
+    margin-left: 240px;
+    background-color: #e0e0e0;
+    min-height: calc(100% - 32px);
+    padding: 24px 16px; }
+    main section.main h1 {
+      display: none; }
+    main section.main .popUp {
+      position: fixed;
+      background-color: white;
+      width: calc(100% - 272px);
+      padding: 30px;
+      height: 17vh;
+      top: 47px;
+      margin-left: -16px; }
+    main section.main .infoWindow {
+      z-index: 97;
+      position: fixed;
+      background-color: white;
+      width: calc(100% - 272px);
+      padding: 16px;
+      padding-bottom: 10vh;
+      height: 90vh;
+      top: 47px;
+      margin-left: -16px;
+      overflow-y: auto; }
+      main section.main .infoWindow::-webkit-scrollbar {
+        width: 1em;
+        padding-bottom: 14px; }
+      main section.main .infoWindow::-webkit-scrollbar-track {
+        opacity: 0; }
+      main section.main .infoWindow::-webkit-scrollbar-thumb {
+        background-color: #a5a5a5;
+        outline: 1px solid #a5a5a5; }
+      main section.main .infoWindow tr {
+        pointer-events: none; }
+    main section.main .editPage div {
+      margin-bottom: 8px; }
+      main section.main .editPage div input[type="text"], main section.main .editPage div textarea {
+        width: 500px; }
+      main section.main .editPage div select {
+        width: 528px; }
+    main section.main table.listObject {
+      width: 100%;
+      margin: 1% auto 0; }
+      main section.main table.listObject tr {
+        background-color: #f7f7f7; }
+        main section.main table.listObject tr th, main section.main table.listObject tr td {
+          padding: 8px;
+          line-height: 30px;
+          min-height: 30px;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle; }
+        main section.main table.listObject tr td.dataArticle {
+          white-space: normal;
+          word-wrap: break-word;
+          text-align: left; }
+        main section.main table.listObject tr td a.feedbackBtn {
+          display: block;
+          padding: 10px 15px 7px;
+          font-size: 15px;
+          color: white;
+          margin-right: 4px;
+          float: left; }
+        main section.main table.listObject tr td a.satisEdit {
+          color: #44ca2f; }
+          main section.main table.listObject tr td a.satisEdit:hover {
+            color: #001f00; }
+        main section.main table.listObject tr td.funcTd {
+          min-width: 250px; }
+        main section.main table.listObject tr:nth-child(even) {
+          background-color: #eee; }
+        main section.main table.listObject tr:nth-child(n+2) {
+          color: #011c0a; }
+          main section.main table.listObject tr:nth-child(n+2):hover {
+            background-color: #ed1d79;
+            color: white; }
+          main section.main table.listObject tr:nth-child(n+2)[ng-show="nodata"] {
+            pointer-events: none; }
+        main section.main table.listObject tr:nth-child(1) {
+          color: #001f00; }
+          main section.main table.listObject tr:nth-child(1) td:nth-child(5) {
+            text-align: center; }
+    main section.main .pageNumber {
+      clear: both;
+      position: relative;
+      bottom: -95px;
+      margin-bottom: 19px;
+      text-align: center; }
+      main section.main .pageNumber .center {
+        display: inline-block;
+        margin: 0 auto; }
+        main section.main .pageNumber .center > * {
+          float: left; }
+        main section.main .pageNumber .center > ul {
+          margin: 0 auto -17px; }
+          main section.main .pageNumber .center > ul li {
+            font-size: 18px;
+            width: 47px;
+            text-align: center;
+            cursor: pointer;
+            line-height: 47px;
+            float: left;
+            color: #001f00;
+            transition: background-color .5s, color .5s;
+            -webkit-transition: background-color .5s, color .5s; }
+            main section.main .pageNumber .center > ul li:hover {
+              background-color: #44ca2f;
+              color: #011c0a; }
+            main section.main .pageNumber .center > ul li.active {
+              background-color: #31943c;
+              color: white;
+              pointer-events: none; }
+        main section.main .pageNumber .center .pageUpDown {
+          width: 75px;
+          height: 47px;
+          display: block; }
+
+/*# sourceMappingURL=main.css.map */
