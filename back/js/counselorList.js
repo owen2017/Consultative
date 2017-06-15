@@ -25,16 +25,45 @@ define(['angular'], function (angular) {
 			$scope.page_ctl    = false;
 			$scope.nodata      = false;
 
-			$scope.areas = function(){
+			$scope.reupdata = function(){
+				$scope.upd_name = false;
+				$scope.upd_password = false;
+				$scope.upd_gender = false;
+				$scope.upd_identity = false;
+				$scope.upd_mobile = false;
+				$scope.upd_phone = false;
+				$scope.upd_email = false;
+				$scope.upd_area = false;
+				$scope.upd_office_time = false;
+				$scope.upd_office_area = false;
+				$scope.upd_job = false;
+				$scope.upd_service_area = false;
+				$scope.upd_serviceobj = false;
+				$scope.upd_serviceLimit = false;
+				$scope.upd_charges = false;
+				$scope.upd_seniority = false;
+				$scope.upd_training = false;
+				$scope.upd_experience = false;
+				$scope.upd_case_times = false;
+				$scope.upd_education = false;
+				$scope.upd_license = false;
+				$scope.upd_license_num = false;
+				$scope.upd_specialty = false;
+			}
+
+			$scope.reupdata();
+
+
+			$scope.default = function(){
 				var cmd = {};
 				cmd.cmd = "5,1";
 				do_ajax.do_post(cmd).then(function(data){
 					if(data!=false){
-						$scope.areas = data["area"];
+						$scope.default = data;
 					}
 				});
 			}
-			$scope.areas();
+			$scope.default();			
 
 			$scope.search = function(_page){
 				var cmd = {};
@@ -76,6 +105,7 @@ define(['angular'], function (angular) {
 			  	});
 			}
 			$scope.search();
+
 
 			// 修改狀態
 			$scope.upd_status = function(sn, enable){
@@ -139,7 +169,7 @@ define(['angular'], function (angular) {
 
 			// 顯示詳細內容
 			$scope.pop_detail = function(_index){
-				$scope.detail = $scope.list[_index];
+				$scope.detail = $scope.list[_index];				
 				$scope.show_detail = true;
 			}
 
@@ -147,7 +177,58 @@ define(['angular'], function (angular) {
 			$scope.close_detail = function(){
 				$scope.detail = [];
 				$scope.show_detail = false;
-			}		
+				$scope.reupdata();
+			}	
+
+			$scope.do_show_upd = function(_type){	
+
+				$scope.reupdata();
+				$scope["upd_"+_type] = true;
+				var data = $scope.detail[_type];
+
+				if(_type=="gender" || _type=="charges"){
+					$scope["sel_"+_type] = data;
+				}
+
+				if(_type=="office_area" || _type=="serviceobj" || _type=="training" || _type=="license" || _type=="specialty"){
+					
+					var def = (data["def"])?data["def"]:data;
+					var other = data["other"];
+					$scope["sel_"+_type] = {};
+					var len = $scope.default[_type].length;
+					for (var i = 0; i < len; i++) {
+						var sel = $scope.default[_type][i];					
+						var chk = def.indexOf(sel);		
+						if(chk>=0){
+							$scope["sel_"+_type][sel] = true;
+						}
+						if(other && other!=""){
+							$scope["sel_"+_type]["other"] = true;
+							$scope["other_"+_type] = other;
+						}
+					}
+				}
+
+				if(_type=="area"){
+
+					$scope["sel_"+_type] = {};
+					var len = $scope.default[_type].length;
+					for (var i = 0; i < len; i++) {						
+						var city = $scope.default[_type][i]["city"];
+						var chk = data.indexOf(city);
+						
+						if(chk>=0){
+							$scope["sel_"+_type][city] = true;
+						}
+					}
+				}
+			}
+
+			$scope.do_upd_counselor = function(_type){				
+				// $scope["upd_"+_type] = ($scope["upd_"+_type])?false:true;
+			}
+
+
 
 
 			//設置當前選中頁樣式
@@ -238,9 +319,13 @@ define(['angular'], function (angular) {
 				var _obj = JSON.parse(obj);
 				if(_obj["checkbox"]){
 					var data = _obj["checkbox"];					
-					var rtn = $scope.obj_to_str(data)
+					var rtn = {};
+					rtn["def"] = $scope.obj_to_str(data);
+					rtn["all"] = rtn["def"];
+					rtn["other"] = "";
 					if(_obj["other"]!=""){
-						rtn += " , "+_obj["other"];
+						rtn["other"] = _obj["other"];
+						rtn["all"] += " , "+_obj["other"];
 					}
 				}else{
 					var data = _obj;

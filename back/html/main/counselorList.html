@@ -12,7 +12,7 @@
 			<input type="text" ng-model="name" placeholder="姓名">
 			<select ng-model="area">
 				<option value="">地區</option>
-				<option ng-repeat="(key, value) in areas" value="{{value.city}}">{{value.city}}</option>
+				<option ng-repeat="(key, value) in default.area" value="{{value.city}}">{{value.city}}</option>
 			</select>
 			<select ng-model="satisfaction">
 				<option value="">滿意度</option>
@@ -108,87 +108,322 @@
 				<tr>
 					<td>姓名</td>
 					<td>{{ detail.name }}</td>
+					<td><input type="button" ng-click="do_show_upd('name')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_name" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.name}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('name')" value="修改"></td>
+				</tr>
+
+
+				<tr>
+					<td>密碼</td>
+					<td>{{ detail.password }}</td>
+					<td><input type="button" ng-click="do_show_upd('password')" value="▼"></td>
+				</tr>
+				<tr ng-show="upd_password" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.password}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('password')" value="修改"></td>
+				</tr>
+
+
+				<tr>
+					<td>性別</td>
+					<td>{{ detail.gender }}</td>
+					<td><input type="button" ng-click="do_show_upd('gender')" value="▼"></td>
+				</tr>
+				<tr ng-show="upd_gender" style="height: 100px;">
+					<td></td>
+					<td>
+						<span ng-repeat="(gender_key, gender_value) in default.gender">
+							<input type="radio" name="radio_gender" value="{{gender_value}}" ng-model="$parent.sel_gender">{{ gender_value }}
+						</span>
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('gender')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>專業人員同志身分</td>
 					<td>{{ detail.identity }}</td>
+					<td><input type="button" ng-click="do_show_upd('identity')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_identity" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.identity}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('identity')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>手機</td>
 					<td>{{ detail.mobile }}</td>
+					<td><input type="button" ng-click="do_show_upd('mobile')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_mobile" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.mobile}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('mobile')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>機構電話</td>
 					<td>{{ detail.phone }}</td>
+					<td><input type="button" ng-click="do_show_upd('phone')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_phone" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.phone}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('phone')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>E-mail</td>
 					<td>{{ detail.email }}</td>
+					<td><input type="button" ng-click="do_show_upd('email')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_email" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.email}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('email')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>服務地區</td>
 					<td>{{ detail.area }}</td>
+					<td><input type="button" ng-click="do_show_upd('area')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_area" style="height: 100px;">
+					<td></td>
+					<td class="dataArticle">
+						<span ng-repeat="(area_key, area_value) in default.area">
+							<input type="checkbox" value="{{area_value.city}}" ng-checked="sel_area[area_value.city]">{{ area_value.city }}
+						</span>
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('area')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>服務時段</td>
 					<td>{{ detail.office_time }}</td>
+					<td><input type="button" ng-click="do_show_upd('office_time')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_office_time" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.office_time}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('office_time')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>工作場域</td>
-					<td>{{ detail.office_area }}</td>
+					<td>{{ detail.office_area.all }}</td>
+					<td><input type="button" ng-click="do_show_upd('office_area')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_office_area" style="height: 100px;">
+					<td></td>
+					<td class="dataArticle">
+						<span ng-repeat="(office_area_key, office_area_value) in default.office_area">
+							<input type="checkbox" value="{{office_area_value}}" ng-checked="sel_office_area[office_area_value]">{{ office_area_value }}
+						</span>
+						<br>
+						<input type="checkbox" ng-checked="sel_office_area.other">
+						<input type="text" ng-model="other_office_area">
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('office_area')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>職稱</td>
 					<td>{{ detail.job }}</td>
+					<td><input type="button" ng-click="do_show_upd('job')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_job" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.job}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('job')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>可服務地點 :</td>
 					<td>{{ detail.service_area }}</td>
+					<td><input type="button" ng-click="do_show_upd('service_area')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_service_area" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.service_area}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('service_area')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>可服務對象</td>
 					<td>{{ detail.serviceobj }}</td>
+					<td><input type="button" ng-click="do_show_upd('serviceobj')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_serviceobj" style="height: 100px;">
+					<td></td>
+					<td class="dataArticle">
+						<span ng-repeat="(serviceobj_key, serviceobj_value) in default.serviceobj">
+							<input type="checkbox" value="{{serviceobj_value}}" ng-checked="sel_serviceobj[serviceobj_value]">{{ serviceobj_value }}
+						</span>						
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('serviceobj')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>服務對象限制</td>
 					<td>{{ detail.serviceLimit }}</td>
+					<td><input type="button" ng-click="do_show_upd('serviceLimit')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_serviceLimit" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.serviceLimit}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('serviceLimit')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>收費標準</td>
 					<td>{{ detail.charges }}</td>
+					<td><input type="button" ng-click="do_show_upd('charges')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_charges" style="height: 100px;">
+					<td></td>
+					<td>
+						<span ng-repeat="(charges_key, charges_value) in default.charges">
+							<input type="radio" name="radio_charges" value="{{charges_value}}" ng-model="$parent.sel_charges">{{ charges_value }}
+						</span>
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('charges')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>年資</td>
 					<td>{{ detail.seniority }} 年</td>
+					<td><input type="button" ng-click="do_show_upd('seniority')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_seniority" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.seniority}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('seniority')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>修課及訓練</td>
-					<td>{{ detail.training }}</td>
+					<td>{{ detail.training.all }}</td>
+					<td><input type="button" ng-click="do_show_upd('training')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_training" style="height: 100px;">
+					<td></td>
+					<td class="dataArticle">
+						<span ng-repeat="(training_key, training_value) in default.training">
+							<input type="checkbox" value="{{training_value}}" ng-checked="sel_training[training_value]">{{ training_value }}
+							<br>
+						</span>
+						<input type="checkbox" ng-checked="sel_training.other">
+						<input type="text" ng-model="other_training">
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('training')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>服務同志實務經歷</td>
 					<td>{{ detail.experience }}</td>
+					<td><input type="button" ng-click="do_show_upd('experience')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_experience" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.experience}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('experience')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>接案次數</td>
 					<td>{{ detail.case_times }}</td>
+					<td><input type="button" ng-click="do_show_upd('case_times')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_case_times" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.case_times}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('case_times')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>學歷</td>
 					<td>{{ detail.education }}</td>
+					<td><input type="button" ng-click="do_show_upd('education')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_education" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.education}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('education')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>證照</td>
-					<td>{{ detail.license }}</td>
+					<td>{{ detail.license.all }}</td>
+					<td><input type="button" ng-click="do_show_upd('license')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_license" style="height: 100px;">
+					<td></td>
+					<td class="dataArticle">
+						<span ng-repeat="(license_key, license_value) in default.license">
+							<input type="checkbox" value="{{license_value}}" ng-checked="sel_license[license_value]">{{ license_value }}
+							<br>
+						</span>
+						<input type="checkbox" ng-checked="sel_license.other">
+						<input type="text" ng-model="other_license">
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('license')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>證照證號</td>
 					<td>{{ detail.license_num }}</td>
+					<td><input type="button" ng-click="do_show_upd('license_num')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_license_num" style="height: 100px;">
+					<td></td>
+					<td><input type="text" value="{{detail.license_num}}"></td>
+					<td><input type="button" ng-click="do_upd_counselor('license_num')" value="修改"></td>
+				</tr>
+
+
 				<tr>
 					<td>專長</td>
-					<td>{{ detail.specialty }}</td>
+					<td>{{ detail.specialty.all }}</td>
+					<td><input type="button" ng-click="do_show_upd('specialty')" value="▼"></td>
 				</tr>
+				<tr ng-show="upd_specialty" style="height: 100px;">
+					<td></td>
+					<td class="dataArticle">
+						<span ng-repeat="(specialty_key, specialty_value) in default.specialty">
+							<input type="checkbox" value="{{specialty_value}}" ng-checked="sel_specialty[specialty_value]">{{ specialty_value }}
+							<br>
+						</span>
+						<input type="checkbox" style="float: left;" ng-checked="sel_specialty.other">
+						<textarea cols="45" rows="3" ng-model="other_specialty"></textarea>
+					</td>
+					<td><input type="button" ng-click="do_upd_counselor('specialty')" value="修改"></td>
+				</tr>
+
 			</table>
 		</div>
 	</section>

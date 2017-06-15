@@ -7,6 +7,7 @@
 		// $ARG=$_GET;
 		exit();
 	}else{
+		
 		$ARG = json_decode(file_get_contents("php://input"),true);
 		$ARG =(!$ARG)?$_POST:$ARG;
 	}

@@ -227,8 +227,8 @@ main {
       main section.main .infoWindow::-webkit-scrollbar-thumb {
         background-color: #a5a5a5;
         outline: 1px solid #a5a5a5; }
-      main section.main .infoWindow tr {
-        pointer-events: none; }
+      /*main section.main .infoWindow tr {
+        pointer-events: none; }*/
     main section.main .editPage div {
       margin-bottom: 8px; }
       main section.main .editPage div input[type="text"], main section.main .editPage div textarea {

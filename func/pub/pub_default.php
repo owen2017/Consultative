@@ -8,12 +8,14 @@
 		# 取得全部預設資料
 	    static function get_all_def(){
 
+	    	$data["gender"]      = DEF::sql_get_gender_def();
 	    	$data["area"]        = DEF::sql_get_area_def();
 	    	$data["specialty"]   = DEF::sql_get_specialty_def();
 	    	$data["license"]     = DEF::sql_get_license_def();
 	    	$data["serviceobj"]  = DEF::sql_get_serviceobj_def();
 	    	$data["office_area"] = DEF::sql_get_office_area_def();
 	    	$data["training"]    = DEF::sql_get_training_def();
+	    	$data["charges"]     = DEF::sql_get_charges_def();
 
 	    	return RTN::do_return("0","SUCCESS",$data);
 	    } 
@@ -179,6 +181,42 @@
 			if(count($ary)<=0){return false;}			
 			return $ary;
 	    }
+
+	    static function sql_get_gender_def(){
+	    	$sql  = " select gender";
+	    	$sql .= " from config_gender";
+	    	$sql .= " where 1=1";
+
+	    	// echo $sql;
+
+	    	$result =  DB::SqlQuery($sql);
+	    	
+	    	$ary = array();
+	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {	    		
+				$ary[] = $row["gender"];
+			}			
+			if(count($ary)<=0){return false;}			
+			return $ary;
+	    }
+
+	    static function sql_get_charges_def(){
+	    	$sql  = " select charges";
+	    	$sql .= " from config_charges";
+	    	$sql .= " where 1=1";
+
+	    	// echo $sql;
+
+	    	$result =  DB::SqlQuery($sql);
+	    	
+	    	$ary = array();
+	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {	    		
+				$ary[] = $row["charges"];
+			}			
+			if(count($ary)<=0){return false;}			
+			return $ary;
+	    }
+
+	    
 
 
 
