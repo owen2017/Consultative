@@ -300,7 +300,7 @@
 	    	}   	
 	    	
 	    	$sql .= " where sn='".$_sn."'";
-	    	echo $sql;
+	    	// echo $sql;
 
 	    	$result = DB::SqlQuery($sql);
 	    	if(DB::$affect<=0){return false;}

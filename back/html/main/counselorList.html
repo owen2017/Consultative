@@ -106,6 +106,10 @@
 			<input type="button" value="關閉" ng-click="close_detail()">
 			<table class="listObject">
 				<tr>
+					<td>姓名</td>
+					<td>{{ detail.name }}</td>
+				</tr>
+				<tr>
 					<td>專業人員同志身分</td>
 					<td>{{ detail.identity }}</td>
 				</tr>
@@ -152,6 +156,10 @@
 				<tr>
 					<td>收費標準</td>
 					<td>{{ detail.charges }}</td>
+				</tr>
+				<tr>
+					<td>年資</td>
+					<td>{{ detail.seniority }} 年</td>
 				</tr>
 				<tr>
 					<td>修課及訓練</td>
