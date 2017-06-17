@@ -15,6 +15,7 @@ define(['angular'], function (angular) {
 			code["ERR_NO_APPLY_DATA"] 		= "沒有申請資料";
 			code["ERR_ACCOUNT_REPEAT"] 		= "帳號重複";
 			code["ERR_UPD_MEM_FAIL"] 		= "修改會員資料失敗";
+			code["ERR_NO_COUNSELOR"] 		= "沒有這個諮商師";
 
 			// var _msg = (code[msg])?code[msg]:"未知錯誤";
 			if(msg=="ERR_NO_DATA"){return;}

@@ -564,5 +564,22 @@
 	 		return true;	
 	    }
 
+	    static function sql_log_back_changed($_cid, $_type, $_oldData, $_newData){
+	    	$sql  = "insert into log_back_changed set";
+	    	$sql .= " cid =".$_cid;
+	    	$sql .= " , `type` ='".$_type."'";
+	    	$sql .= " , oldData ='".$_oldData."'";
+	    	$sql .= " , newData ='".$_newData."'";
+	    	$sql .= " , builttime ='".time()."'";
+	    	$sql .= " , op='".SID::$MID."'";
+	    	$sql .= " , op_IP='".UIP::$UIP."'";
+
+	    	// echo $sql;
+
+	    	$result = DB::SqlQuery($sql);
+	    	if(DB::$affect<=0){return false;}
+	 		return true;
+	    }
+
 	}
 ?>

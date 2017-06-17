@@ -157,6 +157,32 @@
 	    	return RTN::do_return("0","SUCCESS",array());
 	    }
 
+	    # 後台修改諮商師資料
+	    static function back_do_modify($ARG){
+	    	
+	    	$sn     = $ARG["sn"];
+	    	$type   = $ARG["type"];
+	    	$modify = $ARG["modify"];
+
+	    	$data = CNL_SQL::sql_get_list($sn, "", "", "", "", "", "", "");
+	    	if($data==false){
+	    		# 沒有這個諮商師	    		
+	    		return RTN::do_return("-1","ERR_NO_COUNSELOR","");
+	    	} 
+
+	    	$counselor = $data[0];
+	    	$before = $data[0][$type];
+
+	    	$upd = CNL_SQL::sql_do_upd_modify($sn, $type, $before, $modify);
+	    	if($upd==false){
+	    		# 修改失敗
+	    		return RTN::do_return("-1","ERR_UPD_MEM_FAIL","");
+	    	}
+
+	    	$log = CNL_SQL::sql_log_back_changed($sn, $type, $before, $modify);
+	    	return RTN::do_return("0","SUCCESS",array());
+	    }
+
 
 	}
 ?>

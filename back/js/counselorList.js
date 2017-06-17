@@ -50,8 +50,34 @@ define(['angular'], function (angular) {
 				$scope.upd_license_num = false;
 				$scope.upd_specialty = false;
 			}
-
 			$scope.reupdata();
+
+			$scope.empty_updata = function(){
+				$scope.updata_name         = "";
+				$scope.updata_password     = "";
+				$scope.updata_gender       = "";
+				$scope.updata_identity     = "";
+				$scope.updata_mobile       = "";
+				$scope.updata_phone        = "";
+				$scope.updata_email        = "";
+				$scope.updata_area         = "";
+				$scope.updata_office_time  = "";
+				$scope.updata_office_area  = "";
+				$scope.updata_job          = "";
+				$scope.updata_service_area = "";
+				$scope.updata_serviceobj   = "";
+				$scope.updata_serviceLimit = "";
+				$scope.updata_charges      = "";
+				$scope.updata_seniority    = "";
+				$scope.updata_training     = "";
+				$scope.updata_experience   = "";
+				$scope.updata_case_times   = "";
+				$scope.updata_education    = "";
+				$scope.updata_license      = "";
+				$scope.updata_license_num  = "";
+				$scope.updata_specialty    = "";
+			}
+			$scope.empty_updata();
 
 
 			$scope.default = function(){
@@ -169,14 +195,36 @@ define(['angular'], function (angular) {
 
 			// 顯示詳細內容
 			$scope.pop_detail = function(_index){
-				$scope.detail = $scope.list[_index];				
+				$scope.detail = $scope.list[_index];
+				
+				$scope.updata_name         = $scope.list[_index]["name"];
+				$scope.updata_password     = $scope.list[_index]["password"];
+				$scope.updata_gender       = $scope.list[_index]["gender"];
+				$scope.updata_identity     = $scope.list[_index]["identity"];
+				$scope.updata_mobile       = $scope.list[_index]["mobile"];
+				$scope.updata_phone        = $scope.list[_index]["phone"];
+				$scope.updata_email        = $scope.list[_index]["email"];
+				$scope.updata_area         = $scope.list[_index]["area"];
+				$scope.updata_office_time  = $scope.list[_index]["office_time"];
+				$scope.updata_job          = $scope.list[_index]["job"];
+				$scope.updata_service_area = $scope.list[_index]["service_area"];
+				$scope.updata_serviceobj   = $scope.list[_index]["serviceobj"];
+				$scope.updata_serviceLimit = $scope.list[_index]["serviceLimit"];
+				$scope.updata_charges      = $scope.list[_index]["charges"];
+				$scope.updata_seniority    = $scope.list[_index]["seniority"];
+				$scope.updata_experience   = $scope.list[_index]["experience"];
+				$scope.updata_case_times   = $scope.list[_index]["case_times"];
+				$scope.updata_education    = $scope.list[_index]["education"];
+				$scope.updata_license_num  = $scope.list[_index]["license_num"];
+				// console.log($scope.detail);			
 				$scope.show_detail = true;
 			}
 
 			// 關閉詳細內容
 			$scope.close_detail = function(){
-				$scope.detail = [];
+				$scope.detail      = [];
 				$scope.show_detail = false;
+				$scope.empty_updata();
 				$scope.reupdata();
 			}	
 
@@ -200,7 +248,8 @@ define(['angular'], function (angular) {
 						var sel = $scope.default[_type][i];					
 						var chk = def.indexOf(sel);		
 						if(chk>=0){
-							$scope["sel_"+_type][sel] = true;
+							$scope["sel_"+_type][sel] = true;							
+							// console.log($scope["sel_"+_type]);
 						}
 						if(other && other!=""){
 							$scope["sel_"+_type]["other"] = true;
@@ -213,19 +262,78 @@ define(['angular'], function (angular) {
 
 					$scope["sel_"+_type] = {};
 					var len = $scope.default[_type].length;
+					var ary = [];
 					for (var i = 0; i < len; i++) {						
 						var city = $scope.default[_type][i]["city"];
 						var chk = data.indexOf(city);
 						
 						if(chk>=0){
-							$scope["sel_"+_type][city] = true;
+							$scope["sel_"+_type][city] = true;						
 						}
 					}
 				}
 			}
 
-			$scope.do_upd_counselor = function(_type){				
-				// $scope["upd_"+_type] = ($scope["upd_"+_type])?false:true;
+			$scope.do_upd_counselor = function(_sn, _type){	
+
+				var cmd  = {};
+				cmd.cmd  = "2,30";							
+				cmd.sid  = $routeParams.sid;
+				cmd.sn   = _sn;
+				cmd.type = _type;
+
+				if(_type=="name" || _type=="password" || _type=="identity" || _type=="mobile" || _type=="phone" || _type=="email" || _type=="office_time" || _type=="job" || _type=="service_area" || _type=="serviceLimit"  || _type=="seniority" || _type=="experience" || _type=="case_times" || _type=="education" || _type=="license_num"){
+					cmd.modify  = $scope["updata_"+_type];				
+				}
+
+				if(_type=="gender" || _type=="charges"){
+					cmd.modify  = $scope["sel_"+_type];				
+				}
+
+				if(_type=="area" || _type=="serviceobj"){					
+					var ary = {};
+					var i = 0;
+					angular.forEach($scope["sel_"+_type], function(val, key){									
+						if (!!$scope["sel_"+_type][key]){
+							ary[i] = key;
+							i++;
+						}
+					});								
+					cmd.modify  = JSON.stringify(ary);
+				}
+				
+				if(_type=="office_area" || _type=="training" || _type=="license" || _type=="specialty"){					
+					var ary = {};
+					ary["checkbox"] = {};
+					ary["other"] = "";
+					var i = 0;
+					angular.forEach($scope["sel_"+_type], function(val, key){	
+									
+						if (!!$scope["sel_"+_type][key] && key!="other"){
+							ary["checkbox"][i] = key;
+							i++;
+						}
+						if(!!$scope["sel_"+_type][key] && key=="other"){
+							ary["other"] = $scope["other_"+_type];
+						}
+					});		
+									
+					cmd.modify  = JSON.stringify(ary);
+				}
+				
+
+
+				// console.log(cmd.modify);	
+				// return;
+
+				do_ajax.do_post(cmd).then(function(data){
+			    	if(data!=false){
+			    	  	alert("成功");
+			    	  	$scope.search();
+			    	  	$scope.close_detail();
+			    	}		    	
+			    	
+			  	});
 			}
 
 

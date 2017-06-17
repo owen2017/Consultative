@@ -66,6 +66,11 @@
 			echo CNL::front_do_login($ARG);
 	        break;
 
+	    # 後台修改諮商師資料
+	    case 30:	     
+			echo CNL_MODIFY::back_do_modify($ARG);
+	        break;
+
 	    default:
 	    	break;
 	}
