@@ -510,7 +510,7 @@
 	    	
 	    	$ary = array();
 	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-	    		unset($row["password"]);
+	    		// unset($row["password"]);
 				$ary[] = $row;
 
 			}			

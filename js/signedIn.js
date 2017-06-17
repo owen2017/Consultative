@@ -47,7 +47,8 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 	}
 
 	// 產生諮商師列表
-	_app.do_list = function(){		
+	_app.do_list = function(){	
+		console.log(app.counselor);	
 		$.each(app.counselor, function(key, val){
 
 			if(key=="gender" || key=="charges" || key=="idea1" || key=="idea2"){
@@ -131,8 +132,8 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 			// 專業人員同志身分 手機 	機構電話 E-mail 
 			// 服務時段 職稱	可服務地點 服務對象限制  
 			// 年資 服務同志實務經歷 接案次數 學歷
-			// 證照證號
-			if(type=="identity" || type=="mobile" || type=="phone" || type=="email" || type=="office_time" || type=="job" || type=="service_area" || type=="serviceLimit" || type=="seniority" || type=="experience" || type=="case_times" || type=="education" || type=="license_num"){							
+			// 證照證號 密碼
+			if(type=="password" || type=="identity" || type=="mobile" || type=="phone" || type=="email" || type=="office_time" || type=="job" || type=="service_area" || type=="serviceLimit" || type=="seniority" || type=="experience" || type=="case_times" || type=="education" || type=="license_num"){							
 				data = $("[signedIn="+type+"]").val();				
 			}
 

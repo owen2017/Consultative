@@ -47,6 +47,7 @@ if(typeof app.login  == "undefined") app.login  = {};
 
 		var res = app.ajax.do_post(cmd);
 		if(res==false){ 
+			$("[login=captcha]").val("");
 			$("#captcha").attr("src", "Captcha/Captcha.php");
 			return; 
 		}

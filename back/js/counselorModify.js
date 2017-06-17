@@ -188,7 +188,8 @@ define(['angular'], function (angular) {
 
 function getType(_type){
 	var ary             = [];
-	ary["gender"]       = "性別（認同）";
+	ary["password"]     = "密碼";
+	ary["gender"]       = "性別";
 	ary["identity"]     = "專業人員同志身分";
 	ary["mobile"]       = "手機";
 	ary["phone"]        = "機構電話";
