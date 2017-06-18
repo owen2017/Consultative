@@ -97,12 +97,14 @@ define(['angular'], function (angular) {
 			$scope.pop_detail = function(_index){
 				$scope.detail = $scope.list[_index];
 				$scope.show_detail = true;
+				document.getElementsByTagName("BODY")[0].style.overflowY="hidden";
 			}
 
 			// 關閉詳細內容
 			$scope.close_detail = function(){
 				$scope.detail = [];
 				$scope.show_detail = false;
+				document.getElementsByTagName("BODY")[0].style.overflowY="auto";
 			}
 
 			//設置當前選中頁樣式

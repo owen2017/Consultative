@@ -218,6 +218,7 @@ define(['angular'], function (angular) {
 				$scope.updata_license_num  = $scope.list[_index]["license_num"];
 				// console.log($scope.detail);			
 				$scope.show_detail = true;
+				document.getElementsByTagName("BODY")[0].style.overflowY="hidden";
 			}
 
 			// 關閉詳細內容
@@ -226,6 +227,7 @@ define(['angular'], function (angular) {
 				$scope.show_detail = false;
 				$scope.empty_updata();
 				$scope.reupdata();
+				document.getElementsByTagName("BODY")[0].style.overflowY="auto";
 			}	
 
 			$scope.do_show_upd = function(_type){	
