@@ -581,5 +581,20 @@
 	 		return true;
 	    }
 
+	    # 忘記密碼 - 依帳號取得信箱
+	    static function sql_get_email($_account, $_email){
+	    	$sql  = " select account , email , password ";
+	    	$sql .= " from counselor ";	    	
+	    	$sql .= " where account='".$_account."'";	    	
+	    	// echo $sql;
+	    	$result =  DB::SqlQuery($sql);	    	
+	    	$ary = array();
+	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {	    		
+				$ary[] = $row;
+			}			
+			if(count($ary)<=0){return false;}			
+			return $ary[0];
+	    }
+
 	}
 ?>

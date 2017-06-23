@@ -14,17 +14,17 @@ if(typeof app.register == "undefined") app.register = {};
 
 	// 設定預設資料
 	_app.set_default = function(){
-
+		console.log(app.select.options);
 		$.each(app.select.options, function(key, val){
-			_app.set_checkbox(key, val)
+			_app.set_sel_datas(key, val)
 		});		
 	}
 
-	// 設置checkbox
-	_app.set_checkbox = function(type, data){
+	// 設置可選資料
+	_app.set_sel_datas = function(type, data){
 		var _this = $("[register="+type+"]");
-		if(!_this){ return; }
-
+		if(!_this || _this==undefined){ return; }
+		
 		var br = (_this.attr("br")=="Y")?"<br>":"";
 
 		var _clone = _this.find("span").clone();
@@ -216,10 +216,16 @@ if(typeof app.register == "undefined") app.register = {};
 		cmd.serviceLimit = serviceLimit;
 
 		// ===================================================================
+		// 是否收費
+		// ===================================================================
+		var charges = $("[apply=charges]").val();
+		cmd.charges = charges;
+
+		// ===================================================================
 		// 收費標準
 		// ===================================================================
-		var charges = $("[apply=charges]:checked").val();
-		cmd.charges = charges;
+		var fee = $("[apply=fee]").val();
+		cmd.fee = fee;
 
 		// ===================================================================
 		// 年資
@@ -345,7 +351,8 @@ if(typeof app.register == "undefined") app.register = {};
 		var idea2 = $("[apply=idea2]:checked").val();
 		cmd.idea2 = idea2;
 
-		// console.log(cmd);		
+		console.log(cmd);
+		return;		
 	
 		var res = app.ajax.do_post(cmd);
 		if(res==false){ return; }

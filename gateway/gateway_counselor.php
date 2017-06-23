@@ -71,6 +71,11 @@
 			echo CNL_MODIFY::back_do_modify($ARG);
 	        break;
 
+	    # 忘記密碼
+	    case 40:	     
+			echo CNL_FORGET::forget_password($ARG);
+	        break;
+
 	    default:
 	    	break;
 	}

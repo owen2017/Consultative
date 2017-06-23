@@ -24,6 +24,8 @@ if(typeof app.errCode == "undefined") app.errCode = {};
 		code["ERR_CAPTCHA"]          = "驗證碼錯誤";
 	  	code["ERR_NO_COUNSELOR"]     = "沒有這個諮商師";
 		code["ERR_DATA_IN_VERIFY"]   = "資料修改正在審核中";
+		code["ERR_NO_ACCOUNT"]   	 = "帳號或信箱錯誤";
+		code["ERR_ERROR_EMAIL"]   	 = "帳號或信箱錯誤";
 
 		// var _msg = (code[msg])?code[msg]:"未知錯誤";
 		return code[msg];	

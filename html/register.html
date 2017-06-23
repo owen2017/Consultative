@@ -39,8 +39,8 @@
 		
 		<div>			
 			<h4> 專業人員同志身分 </h4>
-			<input type="text" apply="identity" placeholder="">
-			(性傾向、性別認同或其他同志認同)
+			<input type="text" apply="identity" placeholder="性傾向、性別認同或其他">
+			<!-- (性傾向、性別認同或其他同志認同) -->
 		</div>		
 
 		<div>			
@@ -107,10 +107,18 @@
 			<input type="text" apply="serviceLimit" placeholder="請輸入服務對象限制">
 		</div>
 
+		<div register="charges">
+			<h4> 是否收費 </h4>
+			<span style="display: none;">
+				<input type="radio" name="charges" apply="charges">
+				<span></span>
+			</span>
+			<div></div>
+		</div>		
+
 		<div>
 			<h4> 收費標準 </h4>
-			<input type="radio" apply="charges" name="charges" value="收費" checked>收費
-			<input type="radio" apply="charges" name="charges" value="免費">免費
+			<input type="text" apply="fee" placeholder="請輸入收費標準">
 		</div>
 
 		<div>

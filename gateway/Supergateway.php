@@ -17,7 +17,7 @@
 	
 	require("../func/config/config.php");
 
-	if($cmd!="1,1" && $cmd!="2,4" && $cmd!="2,16" && $cmd!="2,13" && $cmd!="2,20" && $cmd!="3,2" && $cmd!="4,1" && $cmd!="3,5" && $cmd!="5,1"){
+	if($cmd!="1,1" && $cmd!="2,4" && $cmd!="2,16" && $cmd!="2,13" && $cmd!="2,20" && $cmd!="2,40" && $cmd!="3,2" && $cmd!="4,1" && $cmd!="3,5" && $cmd!="5,1"){
 		$chk = SID::do_chk_sid($sid);
 		if($chk===false){echo RTN::do_return("-1","ERR_SID_ERROR","");exit;}
 		if($chk==="overtime"){echo RTN::do_return("-1","ERR_SID_OVER_TIME","");exit;}
@@ -46,7 +46,7 @@
 	    case 5:
 			# 設定
 	       	require("gateway_default.php");
-	        break; 	   
+	        break;	     	   
 
 	    default:
 	    	break;
