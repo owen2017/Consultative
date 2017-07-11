@@ -13,6 +13,8 @@ define(['angular'], function (angular) {
 				$scope.side_counselorModify = false;
 				$scope.side_feedback        = false;
 				$scope.side_bulletin        = false;
+
+				document.getElementsByTagName("BODY")[0].style.overflowY="auto";
 			}
 
 			$scope.side_def();

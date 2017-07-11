@@ -3,12 +3,12 @@
 
 <main class="counselorWindow">
 	
-	<h1>諮商師</h1>
+	<h1>同志諮商專業人員專區</h1>
 
 	<section class="counselorEdit popUpContent">
 		<!-- <a btn="do_update" style="float: right; cursor: pointer;">修改</a> -->
-		<a btn="do_logout" style="float: right; cursor: pointer;">登出</a>
-
+		<a btn="do_logout">登出</a>
+		<h3>帳號資料</h3>
 		<div>			
 			<h4> 帳號 </h4>
 			<input type="text" signedIn="account" disabled>
@@ -24,21 +24,28 @@
 			<input type="text" signedIn="password" placeholder="">
 			<a upd="submit" key="password" style="cursor: pointer;">修改</a>
 		</div>		
-		
-		<div>			
+
+		<div default="gender">
 			<h4> 性別 </h4>
-			<input type="radio" signedIn="gender" name="gender" value="男">男
-			<input type="radio" signedIn="gender" name="gender" value="女">女
-			<input type="radio" signedIn="gender" name="gender" value="其他">其他
+			<label style="display: none;">
+				<input type="radio" signedIn="gender" name="gender" value="">
+				<span></span>
+			</label>
+			<div></div>
 			<a upd="submit" key="gender" style="cursor: pointer;">修改</a>
 		</div>
-		
-		<div>			
-			<h4> 專業人員同志身分 (性傾向、性別認同或其他同志認同)</h4>
-			<input type="text" signedIn="identity" placeholder="">
-			<a upd="submit" key="identity" style="cursor: pointer;">修改</a>
-		</div>		
 
+		<div default="identity" br="Y">
+			<h4> 如果您是同志，您會願意在資料上公開同志身份嗎？ </h4>
+			<label style="display: none;">
+				<input type="radio" signedIn="identity" name="identity" value="">
+				<span></span>
+			</label>
+			<div></div>
+			<input type="text" signedIn="identity_yes" placeholder="請輸入您的同志傾向">
+			<a upd="submit" key="identity" style="cursor: pointer;">修改</a>
+		</div>			
+		<h3>聯絡資料</h3>
 		<div>			
 			<h4> 手機 </h4>
 			<input type="text" signedIn="mobile" placeholder="請輸入手機">
@@ -56,13 +63,13 @@
 			<input type="text" signedIn="email" placeholder="請輸入E-mail">
 			<a upd="submit" key="email" style="cursor: pointer;">修改</a>
 		</div>
-
+		<h3>接案資訊</h3>
 		<div default="area">
 			<h4> 服務地區 </h4>
-			<span style="display: none;">
+			<label style="display: none;">
 				<input type="checkbox" chkbox="area">
 				<span></span>
-			</span>
+			</label>
 			<div></div>
 			<a upd="submit" key="area" style="cursor: pointer;">修改</a>
 		</div>
@@ -75,48 +82,55 @@
 
 		<div default="office_area">			
 			<h4> 工作場域 </h4>
-			<span style="display: none;">
+			<label style="display: none;">
 				<input type="checkbox" chkbox="office_area">
 				<span></span>
-			</span>		
-			<div></div>			
-			<input type="checkbox" chkbox="office_area" key="other">
-			<input type="text" other="office_area" placeholder="其他">
+			</label>		
+			<div></div>
+			<label>	
+				<input type="checkbox" chkbox="office_area" key="other">
+				<span><input type="text" other="office_area" placeholder="其他"></span>
+			</label>
 			<a upd="submit" key="office_area" style="cursor: pointer;">修改</a>
 		</div>	
 
 		<div>
-			<h4> 職稱 </h4>
-			<input type="text" signedIn="job" placeholder="請輸入職稱">
+			<h4> 服務單位/職稱 </h4>
+			<input type="text" signedIn="job" placeholder="請輸入服務單位與職稱">
 			<a upd="submit" key="job" style="cursor: pointer;">修改</a>
 		</div>
 
 		<div>
-			<h4> 可服務地點 </h4>
+			<h4> 可接案地點 </h4>
 			<input type="text" signedIn="service_area" placeholder="請輸入可服務地點">
 			<a upd="submit" key="service_area" style="cursor: pointer;">修改</a>
 		</div>
 
 		<div default="serviceobj">
 			<h4> 可服務對象 </h4>		
-			<span style="display: none;">
+			<label style="display: none;">
 				<input type="checkbox" chkbox="serviceobj">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
 			<a upd="submit" key="serviceobj" style="cursor: pointer;">修改</a>
 		</div>		
 
 		<div>
-			<h4> 服務對象限制 </h4>
+			<h4> 服務對象是否有任何限制 </h4>
 			<input type="text" signedIn="serviceLimit" placeholder="請輸入服務對象限制">
 			<a upd="submit" key="serviceLimit" style="cursor: pointer;">修改</a>
 		</div>
 
-		<div>
+
+		<div default="charges">
 			<h4> 收費標準 </h4>
-			<input type="radio" signedIn="charges" name="charges" value="收費">收費
-			<input type="radio" signedIn="charges" name="charges" value="免費">免費
+			<label style="display: none;">
+				<input type="radio" signedIn="charges" name="charges" value="">
+				<span></span>
+			</label>
+			<div></div>
+			<input type="text" signedIn="fee">
 			<a upd="submit" key="charges" style="cursor: pointer;">修改</a>
 		</div>
 
@@ -125,17 +139,19 @@
 			<input type="text" signedIn="seniority" placeholder="請輸入年資">
 			<a upd="submit" key="seniority" style="cursor: pointer;">修改</a>
 		</div>
-
+		<h3>訓練背景</h3>
 		<div default="training" br="Y">
 			<h4> 修課及訓練 </h4>
-			<span style="display: none;">
+			<label style="display: none;">
 				<input type="checkbox" chkbox="training">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
-			<input type="checkbox" chkbox="training" key="other">
-			<input type="text" other="training" placeholder="其他">
-			(修課及訓練，若多於一項請用，隔開)
+			<label>
+				<input type="checkbox" chkbox="training" key="other">
+				<span><input type="text" other="training" placeholder="其他"></span>
+				<p class="helpTip">(修課及訓練，若多於一項請用，隔開)</p>
+			</label>
 			<a upd="submit" key="training" style="cursor: pointer;">修改</a>
 		</div>
 
@@ -145,9 +161,13 @@
 			<a upd="submit" key="experience" style="cursor: pointer;">修改</a>
 		</div>
 
-		<div>
+		<div default="case_times">
 			<h4> 接案次數 </h4>
-			<input type="text" signedIn="case_times" placeholder="請輸入接案次數">
+			<label style="display: none;">
+				<input type="radio" signedIn="case_times" name="case_times">
+				<span></span>
+			</label>		
+			<div></div>			
 			<a upd="submit" key="case_times" style="cursor: pointer;">修改</a>
 		</div>
 
@@ -159,13 +179,15 @@
 
 		<div default="license">				
 			<h4> 相關證照 </h4>
-			<span style="display: none;">
+			<label style="display: none;">
 				<input type="checkbox" chkbox="license">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
-			<input type="checkbox" chkbox="license" key="other">
-			<input type="text" other="license" placeholder="其他"> 
+			<label>
+				<input type="checkbox" chkbox="license" key="other">
+				<span><input type="text" other="license" placeholder="其他"></span>
+			</label>
 			<a upd="submit" key="license" style="cursor: pointer;">修改</a>
 		</div>
 
@@ -177,25 +199,16 @@
 
 		<div default="specialty" br="Y">
 			<h4>同志諮商領域專長</h4>				
-			<span style="display: none;">
+			<label style="display: none;">
 				<input type="checkbox" chkbox="specialty">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
-			<h4>一般專長</h4>
-			<textarea  other="specialty" cols="45" rows="3" placeholder="請輸入您的諮商專長，若多於一項請用，隔開"></textarea>
+			<h4>諮商輔導領域專長</h4>
+			<textarea other="specialty" cols="45" rows="3" placeholder='請輸入您的諮商專長，若多於一項請用"，"隔開'></textarea>
 			<a upd="submit" key="specialty" style="cursor: pointer;">修改</a>
 		</div>
 
-		<!-- <div>
-			<h4>我對同志諮商的想法</h4>				
-			<div>我認為同志面對的困擾大部分與非同志是類似的</div>
-			<input type="radio" name="idea1" signedIn="idea1" value="是">是
-			<input type="radio" name="idea1" signedIn="idea1" value="否">否
-			<div>我理解同志在某些特定情境可能面臨與非同志不同的處境</div>
-			<input type="radio" name="idea2" signedIn="idea2" value="是">是
-			<input type="radio" name="idea2" signedIn="idea2" value="否">否
-		</div>	 -->	
 	</section>
 	
 </main>

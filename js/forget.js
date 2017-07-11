@@ -30,9 +30,10 @@ if(typeof app.login  == "undefined") app.login  = {};
 		cmd.email   = email;
 
 		var res = app.ajax.do_post(cmd);
-		console.log(res);
+
 		if(res=="SUCCESS"){ 
 			app.popwin.popwin_errmsg("信件已成功寄送");
+			app.popwin.close_popwin_html();
 		}
 	}
 

@@ -5,7 +5,7 @@
 	<aside class="side" ng-include="'html/side/side.html'"></aside>
 
 	<section class="main" ng-controller="counselorList">
-		<h1>諮商師列表</h1>		
+		<h1>專業人員列表</h1>		
 
 		<div class="searchBar">
 			<input type="text" ng-model="acc" placeholder="帳號">
@@ -15,7 +15,7 @@
 				<option ng-repeat="(key, value) in default.area" value="{{value.city}}">{{value.city}}</option>
 			</select>
 			<select ng-model="satisfaction">
-				<option value="">滿意度</option>
+				<option value="">推薦度</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -37,7 +37,7 @@
 					<th>姓名</th>
 					<th>地區</th>
 					<th>年資</th>
-					<th>滿意度</th>
+					<th>推薦度</th>
 					<th>點擊數</th>
 					<th>狀態</th>
 					<th class="funcTd">功能</th>
@@ -89,7 +89,7 @@
 		<div ng-show="div_pop_satisfaction" class="popUp" align="center">
 			<div>	 		
 				<select ng-model="upd_satisfaction">
-				<option value="">滿意度</option>
+				<option value="">推薦度</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -108,7 +108,7 @@
 				<tr>
 					<td>姓名</td>
 					<td>{{ detail.name }}</td>
-					<td><input type="button" ng-click="do_show_upd('name')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('name')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_name" style="height: 100px;">
 					<td></td>
@@ -120,7 +120,7 @@
 				<tr>
 					<td>密碼</td>
 					<td>{{ detail.password }}</td>
-					<td><input type="button" ng-click="do_show_upd('password')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('password')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_password" style="height: 100px;">
 					<td></td>
@@ -132,7 +132,7 @@
 				<tr>
 					<td>性別</td>
 					<td>{{ detail.gender }}</td>
-					<td><input type="button" ng-click="do_show_upd('gender')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('gender')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_gender" style="height: 100px;">
 					<td></td>
@@ -148,19 +148,24 @@
 				<tr>
 					<td>專業人員同志身分</td>
 					<td>{{ detail.identity }}</td>
-					<td><input type="button" ng-click="do_show_upd('identity')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('identity')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_identity" style="height: 100px;">
 					<td></td>
-					<td><input type="text" ng-model="updata_identity"></td>
+					<td>
+						<span ng-repeat="(identity_key, identity_value) in default.identity">
+							<input type="radio" name="radio_identity" value="{{identity_value}}" ng-model="$parent.sel_identity">{{ identity_value }}							
+						</span>
+						<br>
+						<input type="text" ng-model="updata_identity_yes">
+					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'identity')" value="修改"></td>
 				</tr>
-
-
+				
 				<tr>
 					<td>手機</td>
 					<td>{{ detail.mobile }}</td>
-					<td><input type="button" ng-click="do_show_upd('mobile')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('mobile')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_mobile" style="height: 100px;">
 					<td></td>
@@ -172,7 +177,7 @@
 				<tr>
 					<td>機構電話</td>
 					<td>{{ detail.phone }}</td>
-					<td><input type="button" ng-click="do_show_upd('phone')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('phone')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_phone" style="height: 100px;">
 					<td></td>
@@ -184,7 +189,7 @@
 				<tr>
 					<td>E-mail</td>
 					<td>{{ detail.email }}</td>
-					<td><input type="button" ng-click="do_show_upd('email')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('email')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_email" style="height: 100px;">
 					<td></td>
@@ -196,7 +201,7 @@
 				<tr>
 					<td>服務地區</td>
 					<td>{{ detail.area }}</td>
-					<td><input type="button" ng-click="do_show_upd('area')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('area')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_area" style="height: 100px;">
 					<td></td>
@@ -212,7 +217,7 @@
 				<tr>
 					<td>服務時段</td>
 					<td>{{ detail.office_time }}</td>
-					<td><input type="button" ng-click="do_show_upd('office_time')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('office_time')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_office_time" style="height: 100px;">
 					<td></td>
@@ -224,7 +229,7 @@
 				<tr>
 					<td>工作場域</td>
 					<td>{{ detail.office_area.all }}</td>
-					<td><input type="button" ng-click="do_show_upd('office_area')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('office_area')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_office_area" style="height: 100px;">
 					<td></td>
@@ -243,7 +248,7 @@
 				<tr>
 					<td>職稱</td>
 					<td>{{ detail.job }}</td>
-					<td><input type="button" ng-click="do_show_upd('job')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('job')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_job" style="height: 100px;">
 					<td></td>
@@ -255,7 +260,7 @@
 				<tr>
 					<td>可服務地點 :</td>
 					<td>{{ detail.service_area }}</td>
-					<td><input type="button" ng-click="do_show_upd('service_area')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('service_area')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_service_area" style="height: 100px;">
 					<td></td>
@@ -267,7 +272,7 @@
 				<tr>
 					<td>可服務對象</td>
 					<td>{{ detail.serviceobj }}</td>
-					<td><input type="button" ng-click="do_show_upd('serviceobj')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('serviceobj')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_serviceobj" style="height: 100px;">
 					<td></td>
@@ -283,7 +288,7 @@
 				<tr>
 					<td>服務對象限制</td>
 					<td>{{ detail.serviceLimit }}</td>
-					<td><input type="button" ng-click="do_show_upd('serviceLimit')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('serviceLimit')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_serviceLimit" style="height: 100px;">
 					<td></td>
@@ -295,7 +300,7 @@
 				<tr>
 					<td>收費標準</td>
 					<td>{{ detail.charges }}</td>
-					<td><input type="button" ng-click="do_show_upd('charges')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('charges')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_charges" style="height: 100px;">
 					<td></td>
@@ -303,6 +308,7 @@
 						<span ng-repeat="(charges_key, charges_value) in default.charges">
 							<input type="radio" name="radio_charges" value="{{charges_value}}" ng-model="$parent.sel_charges">{{ charges_value }}
 						</span>
+						<input type="text" ng-model="updata_fee">
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'charges')" value="修改"></td>
 				</tr>
@@ -311,7 +317,7 @@
 				<tr>
 					<td>年資</td>
 					<td>{{ detail.seniority }} 年</td>
-					<td><input type="button" ng-click="do_show_upd('seniority')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('seniority')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_seniority" style="height: 100px;">
 					<td></td>
@@ -323,7 +329,7 @@
 				<tr>
 					<td>修課及訓練</td>
 					<td>{{ detail.training.all }}</td>
-					<td><input type="button" ng-click="do_show_upd('training')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('training')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_training" style="height: 100px;">
 					<td></td>
@@ -342,7 +348,7 @@
 				<tr>
 					<td>服務同志實務經歷</td>
 					<td>{{ detail.experience }}</td>
-					<td><input type="button" ng-click="do_show_upd('experience')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('experience')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_experience" style="height: 100px;">
 					<td></td>
@@ -354,19 +360,22 @@
 				<tr>
 					<td>接案次數</td>
 					<td>{{ detail.case_times }}</td>
-					<td><input type="button" ng-click="do_show_upd('case_times')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('case_times')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_case_times" style="height: 100px;">
 					<td></td>
-					<td><input type="text" ng-model="updata_case_times"></td>
+					<td>
+						<span ng-repeat="(case_times_key, case_times_value) in default.case_times">
+							<input type="radio" name="radio_case_times" value="{{case_times_value}}" ng-model="$parent.sel_case_times">{{ case_times_value }}
+						</span>
+					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'case_times')" value="修改"></td>
 				</tr>
-
-
+				
 				<tr>
 					<td>學歷</td>
 					<td>{{ detail.education }}</td>
-					<td><input type="button" ng-click="do_show_upd('education')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('education')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_education" style="height: 100px;">
 					<td></td>
@@ -378,7 +387,7 @@
 				<tr>
 					<td>相關證照</td>
 					<td>{{ detail.license.all }}</td>
-					<td><input type="button" ng-click="do_show_upd('license')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('license')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_license" style="height: 100px;">
 					<td></td>
@@ -397,7 +406,7 @@
 				<tr>
 					<td>證照證號</td>
 					<td>{{ detail.license_num }}</td>
-					<td><input type="button" ng-click="do_show_upd('license_num')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('license_num')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_license_num" style="height: 100px;">
 					<td></td>
@@ -409,7 +418,7 @@
 				<tr>
 					<td>同志諮商領域專長</td>
 					<td>{{ detail.specialty.all }}</td>
-					<td><input type="button" ng-click="do_show_upd('specialty')" value="▼"></td>
+					<td><input type="button" ng-click="do_show_upd('specialty')" value="✎"></td>
 				</tr>
 				<tr ng-show="upd_specialty" style="height: 100px;">
 					<td></td>

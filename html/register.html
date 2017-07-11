@@ -3,46 +3,63 @@
 
 <main class="counselorWindow">
 	
-	<h1>諮商師申請</h1>
-
+	<h1>同志諮商專業人員申請</h1>
+	<h2><i class="required">＊</i>為必填項目</h2>
 	<section class="counselorApply popUpContent">
-
+		<article class="agreement">
+			<h3> 同志諮商專業人員網登錄條款 </h3>
+			<p>請詳細閱讀以下規則、建議，並在勾選同意後開始填寫登錄資訊。<i class="required">＊</i></p>
+			<ol>
+				<li>1. 台灣青少年性別文教會（以下簡稱好性會）建構「同志諮商專業人員網」（以下簡稱本網站）僅提供公益使用，並以提供同志、多元性別族群接觸諮商資源為目的，請勿將網站之資料、架構、個人資訊，用於其他用途或作商業使用，違者好性會將循法律途徑維護相關權益。</li>
+				<li>2. 登錄本網站之專業人員，須對同志、多元性別、性別弱勢族群，抱持「認同、接納、友善」之態度。並依照衛福部之函釋，禁止專業人員進行一切有關性傾向或性別認同「矯正、扭轉、改變」治療、處遇。</li>
+				<li>3. 登錄本網站之專業人員、助人者，請詳實填答您的專業背景、同志專業服務相關訓練，以及申請表單中的態度問題，若本會發覺填答不實或情節嚴重者，保有停權該助人者帳戶之權力。</li>
+				<li>4. 登錄本網站之專業人員，本網站大部分之資訊均為公開、可查詢，請斟酌所填答的資訊，勿將過多個人資訊留在網站上，或記得將個人設定為「留空白」。</li>
+				<li>5. 本網站設有「使用者回饋機制」，即為使用者使用本網站資訊尋求諮商後，可填寫相關回饋經驗，本網站管理者在發現使用者於諮商過程中有重大傷害、多數使用者回饋負評（含不友善態度）時，本網站保有停權該助人者帳戶之權力。</li>
+			</ol>
+			<p><label><input type="checkbox" checked disabled value="agreement"><span>我同意同志諮商專業人員網登錄條款</span></label></p>
+		</article>
+		<h3>帳號資料</h3>
 		<div>			
-			<h4> 帳號 </h4>
+			<h4> 帳號<i class="required">＊</i> </h4>
 			<input type="text" apply="account" placeholder="請輸入帳號">
-			<!-- <p class="helpTip">*英數混和 8~16碼</p> -->
 		</div>
 
 		<div>			
-			<h4> 密碼 </h4>
+			<h4> 密碼<i class="required">＊</i> </h4>
 			<input type="password" apply="password" placeholder="請輸入密碼">
-			<!-- <p class="helpTip">*英數混和 8~16碼</p> -->
 		</div>
 
 		<div>			
-			<h4> 相同密碼 </h4>
+			<h4> 重複密碼<i class="required">＊</i> </h4>
 			<input type="password" apply="password2" placeholder="請再次輸入密碼">
-			<p class="helpTip">*需和密碼相同</p>
+			<p class="helpTip">需和密碼相同</p>
 		</div>
 
 		<div>			
-			<h4> 姓名 </h4>
+			<h4> 姓名<i class="required">＊</i> </h4>
 			<input type="text" apply="name" placeholder="請輸入姓名">
 		</div>			
 		
-		<div>			
-			<h4> 性別（認同）</h4>
-			<input type="radio" apply="gender" name="gender" value="男" checked>男
-			<input type="radio" apply="gender" name="gender" value="女">女
-			<input type="radio" apply="gender" name="gender" value="其他">其他
+		<div register="gender">
+			<h4> 性別 </h4>
+			<label style="display: none;">
+				<input type="radio" name="gender" apply="gender">
+				<span></span>
+			</label>
+			<div></div>			
+		</div>
+
+		<div register="identity" br="Y">
+			<h4> 如果您是同志，您會願意在資料上公開同志身份嗎？<i class="required">＊</i> </h4>
+			<label style="display: none;">
+				<input type="radio" name="identity" apply="identity">
+				<span></span>
+			</label>
+			<div></div>		
+			<input type="text" apply="identity_yes" placeholder="請輸入同志身份">		
 		</div>
 		
-		<div>			
-			<h4> 專業人員同志身分 </h4>
-			<input type="text" apply="identity" placeholder="性傾向、性別認同或其他">
-			<!-- (性傾向、性別認同或其他同志認同) -->
-		</div>		
-
+		<h3>聯絡資料</h3>
 		<div>			
 			<h4> 手機 </h4>
 			<input type="text" apply="mobile" placeholder="請輸入手機">
@@ -54,98 +71,107 @@
 		</div>
 
 		<div>
-			<h4> E-mail </h4>
+			<h4> E-mail<i class="required">＊</i> </h4>
 			<input type="text" apply="email" placeholder="請輸入E-mail">
 		</div>
-
+		<h3>接案資訊</h3>
 		<div register="area">
-			<h4> 服務地區 </h4>
-			<span style="display: none;">
+			<h4> 服務地區<i class="required">＊</i> </h4>
+			<label style="display: none;">
 				<input type="checkbox" chkbox="area">
 				<span></span>
-			</span>
+			</label>
 			<div></div>
 		</div>
 
 		<div>			
 			<h4> 服務時段 </h4>
 			<input type="text" apply="office_time" placeholder="請輸入服務時段">
+			<p class="helpTip">請填寫星期與時間，不限單一時段 <例：(二)19:00-21:00></p>
 		</div>
 
 		<div register="office_area">			
-			<h4> 工作場域 </h4>
-			<span style="display: none;">
+			<h4> 工作場域<i class="required">＊</i> </h4>
+			<label style="display: none;">
 				<input type="checkbox" chkbox="office_area">
 				<span></span>
-			</span>		
-			<div></div>			
-			<input type="checkbox" chkbox="office_area" key="other">
-			<input type="text" other="office_area" placeholder="其他">
+			</label>		
+			<div></div>
+			<label>	
+				<input type="checkbox" chkbox="office_area" key="other">
+				<span><input type="text" other="office_area" placeholder="其他"></span>
+			</label>
 		</div>	
 
 		<div>
-			<h4> 職稱 </h4>
-			<input type="text" apply="job" placeholder="請輸入職稱">
+			<h4> 服務單位/職稱 </h4>
+			<input type="text" apply="job" placeholder="請輸入服務單位與職稱">
 		</div>
 
 		<div>
-			<h4> 可服務地點 </h4>
+			<h4> 可接案地點 </h4>
 			<input type="text" apply="service_area" placeholder="請輸入可服務地點">
+			<p class="helpTip">請依上題填寫您的工作單位<請註明專任或兼任>或地點及其他可服務的場所</p>
 		</div>
 
 		<div register="serviceobj">
-			<h4> 可服務對象 </h4>		
-			<span style="display: none;">
+			<h4> 可服務對象<i class="required">＊</i> </h4>		
+			<label style="display: none;">
 				<input type="checkbox" chkbox="serviceobj">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
 		</div>		
 
 		<div>
-			<h4> 服務對象限制 </h4>
+			<h4> 服務對象是否有任何限制 </h4>
 			<input type="text" apply="serviceLimit" placeholder="請輸入服務對象限制">
 		</div>
 
 		<div register="charges">
-			<h4> 是否收費 </h4>
-			<span style="display: none;">
+			<h4> 是否收費<i class="required">＊</i> </h4>
+			<label style="display: none;">
 				<input type="radio" name="charges" apply="charges">
 				<span></span>
-			</span>
+			</label>
 			<div></div>
-		</div>		
-
-		<div>
-			<h4> 收費標準 </h4>
 			<input type="text" apply="fee" placeholder="請輸入收費標準">
+			<p class="helpTip">若有收費，請填寫此欄 <例：$1200/小時></p>
 		</div>
-
+		
+		<h3>訓練背景</h3>
 		<div>
 			<h4> 年資 </h4>
 			<input type="text" apply="seniority" placeholder="請輸入年資">
 		</div>
 
 		<div register="training" br="Y">
-			<h4> 修課及訓練 </h4>
-			<span style="display: none;">
+			<h4> 修課及訓練<i class="required">＊</i> </h4>
+			<label style="display: none;">
 				<input type="checkbox" chkbox="training">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
-			<input type="checkbox" chkbox="training" key="other">
-			<input type="text" other="training" placeholder="其他">
-			(修課及訓練，若多於一項請用，隔開)
+			<label>
+				<input type="checkbox" chkbox="training" key="other">
+				<span><input type="text" other="training" placeholder="其他"></span>
+			</label>
+			<p class="helpTip">(修課及訓練，若多於一項請用'，'隔開)</p>
 		</div>
 
 		<div>
 			<h4> 服務同志實務經歷 </h4>
 			<input type="text" apply="experience" placeholder="請輸入服務同志實務經歷">
+			<p class="helpTip">服務同志當事人，或接觸同志當事人的相關實務經驗</p>
 		</div>
 
-		<div>
-			<h4> 接案次數 </h4>
-			<input type="text" apply="case_times" placeholder="請輸入接案次數">
+		<div register="case_times">
+			<h4> 同志個案接案人數 </h4>
+			<label style="display: none;">
+				<input type="radio" name="case_times" apply="case_times">
+				<span></span>
+			</label>		
+			<div></div>			
 		</div>
 
 		<div>
@@ -154,14 +180,17 @@
 		</div>
 
 		<div register="license">				
-			<h4> 相關證照 </h4>
-			<span style="display: none;">
+			<h4> 相關證照<i class="required">＊</i> </h4>
+			<label style="display: none;">
 				<input type="checkbox" chkbox="license">
 				<span></span>
-			</span>		
+			</label>		
 			<div></div>
-			<input type="checkbox" chkbox="license" key="other">
-			<input type="text" other="license" placeholder="其他"> 
+			<label>
+				<input type="checkbox" chkbox="license" key="other">
+				<span><input type="text" other="license" placeholder="其他"></span> 
+			</label>
+			<p class="helpTip">若有證照請在本欄填證號</p>
 		</div>
 
 		<div>
@@ -170,24 +199,24 @@
 		</div>
 
 		<div register="specialty" br="Y">
-			<h4>同志諮商領域專長</h4>				
-			<span style="display: none;">
+			<h4>同志諮商領域專長<i class="required">＊</i></h4>				
+			<label style="display: none;">
 				<input type="checkbox" chkbox="specialty">
-				<span></span>
-			</span>		
+				<span>同志友善諮商，是指對同志當事人表達友善的諮商；同志肯定諮商，是指能運用同志肯定諮商理論進行諮商；同志認同諮商，是指擅長處理同志認同議題；同志伴侶／家庭諮商，是指擅長同志親密關係與家庭議題；同志職場諮商，是指擅長處理同志在職場問題的諮商；同志學校諮商，是指擅長對同志在校園中的議題；跨性別同志諮商，是指擅長跨性別議題。</span>
+			</label>		
 			<div></div>
-			<h4>一般專長</h4>
-			<textarea  other="specialty" cols="45" rows="3" placeholder="請輸入您的諮商專長，若多於一項請用，隔開"></textarea>
+			<h4>諮商輔導領域專長</h4>
+			<textarea  other="specialty" cols="45" rows="3" placeholder="請輸入您的諮商專長，若多於一項請用'，'隔開"></textarea><p class="helpTip">請自行填寫(例如：生涯、親密關係、人際關係、情緒管理、壓力管理、悲傷治療、性別暴力、藝術治療、親職、....等)</p>
 		</div>
-
+		<h3>態度題</h3>
 		<div>
-			<h4>我對同志諮商的想法</h4>				
+			<h4>我對同志諮商的想法<i class="required">＊</i></h4>				
 			<div>我認為同志面對的困擾大部分與非同志是類似的</div>
-			<input type="radio" name="idea1" apply="idea1" value="是" checked>是
-			<input type="radio" name="idea1" apply="idea1" value="否">否
+			<label><input type="radio" name="idea1" apply="idea1" value="是" checked><span>是</span></label>
+			<label><input type="radio" name="idea1" apply="idea1" value="否"><span>否</span></label>
 			<div>我理解同志在某些特定情境可能面臨與非同志不同的處境</div>
-			<input type="radio" name="idea2" apply="idea2" value="是" checked>是
-			<input type="radio" name="idea2" apply="idea2" value="否">否
+			<label><input type="radio" name="idea2" apply="idea2" value="是" checked><span>是</span></label>
+			<label><input type="radio" name="idea2" apply="idea2" value="否"><span>否</span></label>
 		</div>
 
 		<div>

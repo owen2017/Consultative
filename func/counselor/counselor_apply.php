@@ -46,12 +46,13 @@
 
 	    # 申請列表 - 新增
 	    static function do_add_apply($_ARG){
-
+	    	
 	    	$account      = $_ARG["account"];
 	    	$password     = $_ARG["password"];
 	    	$name         = $_ARG["name"];
 	    	$gender       = $_ARG["gender"];
 	    	$identity     = $_ARG["identity"];
+	    	$identity_yes = $_ARG["identity_yes"];
 	    	$mobile       = $_ARG["mobile"];
 	    	$phone        = $_ARG["phone"];
 	    	$email        = $_ARG["email"];
@@ -63,6 +64,7 @@
 	    	$serviceobj   = $_ARG["serviceobj"];
 	    	$serviceLimit = $_ARG["serviceLimit"];
 	    	$charges      = $_ARG["charges"];
+	    	$fee          = $_ARG["fee"];
 	    	$seniority    = $_ARG["seniority"];
 	    	$training     = $_ARG["training"];
 	    	$experience   = $_ARG["experience"];
@@ -75,10 +77,15 @@
 	    	$idea2        = $_ARG["idea2"];
 
 	    	$chk_data["account"] = $_ARG["account"];
-	    	$chk_data["mobile"]  = $_ARG["mobile"];
-	    	$chk_data["phone"]   = $_ARG["phone"];
-	    	$chk_data["email"]   = $_ARG["email"];
-	    	
+	    	if($_ARG["mobile"]){
+	    		$chk_data["mobile"]  = $_ARG["mobile"];
+	    	}
+	    	if($_ARG["phone"]){
+	    		$chk_data["phone"]   = $_ARG["phone"];
+	    	}
+	    	if($_ARG["email"]){
+	    		$chk_data["email"]   = $_ARG["email"];
+	    	}
 	    	// 驗證資料是否重複
 	    	foreach ($chk_data as $_key => $_value) {
 
@@ -109,8 +116,8 @@
 		    		return RTN::do_return("-1",$str,"");
 		    	}
 	    	}	    	
-
-	    	$ins = CNL_SQL::sql_ins_counselor_apply($account,$password,$name,$gender,$identity,$mobile,$phone,$email,$area,$office_time,$office_area,$job,$service_area,$serviceobj,$serviceLimit,$charges,$seniority,$training,$experience,$case_times,$education,$license,$license_num,$specialty,$idea1,$idea2);
+	    	
+	    	$ins = CNL_SQL::sql_ins_counselor_apply($account,$password,$name,$gender,$identity,$identity_yes,$mobile,$phone,$email,$area,$office_time,$office_area,$job,$service_area,$serviceobj,$serviceLimit,$charges,$fee,$seniority,$training,$experience,$case_times,$education,$license,$license_num,$specialty,$idea1,$idea2);
 	    	if($ins==false){
 	    		# 新增失敗
 	    		return RTN::do_return("-1","ERR_ADD_FAIL","");
@@ -140,7 +147,7 @@
 	    		return RTN::do_return("-1","ERR_ACCOUNT_REPEAT","");
 	    	}
 	    	
-	    	# 新增至諮商師
+	    	# 新增至專業人員
 	    	$ins = CNL_SQL::sql_ins_counselor($data[0]);
 	    	if($ins==false){
 	    		# 新增失敗

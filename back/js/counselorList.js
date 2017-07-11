@@ -57,6 +57,7 @@ define(['angular'], function (angular) {
 				$scope.updata_password     = "";
 				$scope.updata_gender       = "";
 				$scope.updata_identity     = "";
+				$scope.updata_identity_yes = "";
 				$scope.updata_mobile       = "";
 				$scope.updata_phone        = "";
 				$scope.updata_email        = "";
@@ -68,6 +69,7 @@ define(['angular'], function (angular) {
 				$scope.updata_serviceobj   = "";
 				$scope.updata_serviceLimit = "";
 				$scope.updata_charges      = "";
+				$scope.updata_fee      	   = "";
 				$scope.updata_seniority    = "";
 				$scope.updata_training     = "";
 				$scope.updata_experience   = "";
@@ -201,6 +203,7 @@ define(['angular'], function (angular) {
 				$scope.updata_password     = $scope.list[_index]["password"];
 				$scope.updata_gender       = $scope.list[_index]["gender"];
 				$scope.updata_identity     = $scope.list[_index]["identity"];
+				$scope.updata_identity_yes = $scope.list[_index]["identity_yes"];
 				$scope.updata_mobile       = $scope.list[_index]["mobile"];
 				$scope.updata_phone        = $scope.list[_index]["phone"];
 				$scope.updata_email        = $scope.list[_index]["email"];
@@ -211,6 +214,7 @@ define(['angular'], function (angular) {
 				$scope.updata_serviceobj   = $scope.list[_index]["serviceobj"];
 				$scope.updata_serviceLimit = $scope.list[_index]["serviceLimit"];
 				$scope.updata_charges      = $scope.list[_index]["charges"];
+				$scope.updata_fee          = $scope.list[_index]["fee"];
 				$scope.updata_seniority    = $scope.list[_index]["seniority"];
 				$scope.updata_experience   = $scope.list[_index]["experience"];
 				$scope.updata_case_times   = $scope.list[_index]["case_times"];
@@ -230,16 +234,15 @@ define(['angular'], function (angular) {
 				document.getElementsByTagName("BODY")[0].style.overflowY="auto";
 			}	
 
-			$scope.do_show_upd = function(_type){	
-
+			$scope.do_show_upd = function(_type){					
 				$scope.reupdata();
 				$scope["upd_"+_type] = true;
 				var data = $scope.detail[_type];
 
-				if(_type=="gender" || _type=="charges"){
+				if(_type=="gender" || _type=="charges" || _type=="identity" || _type=="case_times"){
 					$scope["sel_"+_type] = data;
 				}
-
+				
 				if(_type=="office_area" || _type=="serviceobj" || _type=="training" || _type=="license" || _type=="specialty"){
 					
 					var def = (data["def"])?data["def"]:data;
@@ -277,18 +280,17 @@ define(['angular'], function (angular) {
 			}
 
 			$scope.do_upd_counselor = function(_sn, _type){	
-
 				var cmd  = {};
 				cmd.cmd  = "2,30";							
 				cmd.sid  = $routeParams.sid;
 				cmd.sn   = _sn;
 				cmd.type = _type;
 
-				if(_type=="name" || _type=="password" || _type=="identity" || _type=="mobile" || _type=="phone" || _type=="email" || _type=="office_time" || _type=="job" || _type=="service_area" || _type=="serviceLimit"  || _type=="seniority" || _type=="experience" || _type=="case_times" || _type=="education" || _type=="license_num"){
+				if(_type=="name" || _type=="password"|| _type=="mobile" || _type=="phone" || _type=="email" || _type=="office_time" || _type=="job" || _type=="service_area" || _type=="serviceLimit"  || _type=="seniority" || _type=="experience" || _type=="case_times" || _type=="education" || _type=="license_num"){
 					cmd.modify  = $scope["updata_"+_type];				
 				}
 
-				if(_type=="gender" || _type=="charges"){
+				if(_type=="gender"){
 					cmd.modify  = $scope["sel_"+_type];				
 				}
 
@@ -322,11 +324,26 @@ define(['angular'], function (angular) {
 									
 					cmd.modify  = JSON.stringify(ary);
 				}
-				
 
+				if(_type=="identity"){
+					cmd.modify  = $scope["sel_identity"];
+					
+					cmd.type1 = "identity_yes";
+					cmd.modify1 = "";
+					if($scope["sel_identity"]=="我是同志，我願意公開同志身份"){
+						cmd.modify1 = $scope["updata_identity_yes"];
+					}
+				}
 
-				// console.log(cmd.modify);	
-				// return;
+				if(_type=="charges"){
+					cmd.modify  = $scope["sel_charges"];
+					
+					cmd.type1 = "charges_yes";
+					cmd.modify1 = "";
+					if($scope["sel_charges"]=="我是同志，我願意公開同志身份"){
+						cmd.modify1 = $scope["收費"];
+					}
+				}				
 
 				do_ajax.do_post(cmd).then(function(data){
 			    	if(data!=false){

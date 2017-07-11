@@ -1,10 +1,5 @@
 @charset "UTF-8";
 @import url("reset.css");
-/*@import url(//fonts.googleapis.com/earlyaccess/cwtexhei.css);*/
-/*$mainColor: #ef8136;
-$hoverColor: #f9d2b8;
-$fontColor: #d0d0d0;
-$blackColor: #170b02;*/
 body {
   font-family: '微軟正黑體','cwTeXHei', Arial, sans-serif, helvetica;
   background-color: #e0e0e0; }
@@ -12,6 +7,7 @@ body {
     outline: none; }
   body select, body input, body button, body textarea {
     border-color: transparent;
+    -webkit-appearance: none;
     color: white;
     padding: 0 14px;
     font-size: 14px;
@@ -20,13 +16,15 @@ body {
     width: 179px;
     height: 47px;
     background: url(../../img/select.png) no-repeat;
-    background-size: 20%;
-    background-position: 90%; }
+    background-position: 90% top;
+    cursor: pointer; }
+    body select:hover {
+      background-position-y: bottom; }
   body input[type=text], body input[type=password] {
-    line-height: 47px; }
+    line-height: 47px;
+    height: 47px; }
   body select, body input[type=text], body input[type=password], body textarea {
     background-color: #a5a5a5;
-    -webkit-appearance: none;
     border-radius: 0;
     border: none;
     resize: none; }
@@ -71,17 +69,7 @@ body {
   box-shadow: 3px 3px 16px black;
   border-bottom: 5px solid #31943c;
   border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  /*&::after {
-  	content:' ';		
-  	border-width: 10px;
-  	border-style: solid;
-  	border-color: transparent $mainColor $mainColor transparent;
-  	display:block;
-  	width:0;
-  	float:right;
-  	margin-right:5px;
-  }*/ }
+  border-top-left-radius: 25px; }
   .loginGroup h1 {
     margin: 36px 0;
     text-align: center;
@@ -120,7 +108,6 @@ body {
     display: block; }
 
 header {
-  /*display:none;*/
   width: 100%;
   position: fixed;
   top: 0;
@@ -133,15 +120,7 @@ header {
     font-size: 17px;
     width: 240px;
     text-align: center;
-    float: left;
-    /*&::after{
-    	content:' ';
-    	width:24px;
-    	height:7px;
-    	background-color: $mainColor;
-    	display:block;
-    	margin:0 auto;
-    }*/ }
+    float: left; }
   header .logoutBtn {
     float: right; }
 
@@ -193,7 +172,7 @@ main {
             border-top-right-radius: 25px; }
   main section.main {
     width: calc(100% - 272px);
-    float: left;
+    /*float:left;*/
     margin-left: 240px;
     background-color: #e0e0e0;
     min-height: calc(100% - 32px);
@@ -227,8 +206,6 @@ main {
       main section.main .infoWindow::-webkit-scrollbar-thumb {
         background-color: #a5a5a5;
         outline: 1px solid #a5a5a5; }
-      /*main section.main .infoWindow tr {
-        pointer-events: none; }*/
     main section.main .editPage div {
       margin-bottom: 8px; }
       main section.main .editPage div input[type="text"], main section.main .editPage div textarea {
@@ -311,5 +288,12 @@ main {
           width: 75px;
           height: 47px;
           display: block; }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  select {
+    background-image: none !important; }
+
+  main section.main .infoWindow {
+    height: auto; } }
 
 /*# sourceMappingURL=main.css.map */

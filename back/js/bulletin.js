@@ -8,6 +8,7 @@ define(['angular'], function (angular) {
 			$scope.sel_enable 	 = "Y";	
 
 			$scope.ctl_window = function(_sn){
+				$scope.sn = _sn;
 				$scope.window_enable = ($scope.window_enable==false)?true:false;
 				$scope.submit_type = true;
 				$scope.empty();	
@@ -30,10 +31,11 @@ define(['angular'], function (angular) {
 			    	if(data!=false){
 			    		if(_sn!="N"){			    			
 			    			var __sn = "_"+_sn;
-			    			$scope.sn      = data[__sn]["sn"];
+			    			// $scope.sn      = data[__sn]["sn"];
 			    			$scope.title   = data[__sn]["title"];
 			    			$scope.content = data[__sn]["content"];
-			    			$scope.enable  = (data[__sn]["enable"])?"Y":"N";
+			    			// $scope.enable  = (data[__sn]["enable"])?"Y":"N";
+			    			$scope.enable  = (data[__sn]["enable"]=="Y")?"Y":"N";
 			    			$scope.remark  = data[__sn]["remark"];
 			    			$scope.nodata = false;
 			    		}
@@ -67,7 +69,7 @@ define(['angular'], function (angular) {
 				cmd.enable  = $scope.enable;
 				cmd.remark  = $scope.remark;
 				cmd.sid     = $routeParams.sid;
-				
+
 				do_ajax.do_post(cmd).then(function(data){
 			    	if(data!=false){	    		
 			    		alert("成功");
@@ -93,7 +95,7 @@ define(['angular'], function (angular) {
 			}
 
 			$scope.empty = function(){
-				$scope.sn      = "";
+				// $scope.sn      = "";
 				$scope.title   = "";
 				$scope.content = "";
 				$scope.enable  = "Y";

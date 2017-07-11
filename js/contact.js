@@ -6,14 +6,14 @@ if(typeof app.contact == "undefined") app.contact = {};
 
 	_app.init = function(){		
 
-		// 產生諮商師列表
+		// 產生專業人員列表
 		_app.do_list();
 
 		// 按鈕動作
 		// _app.btn_actions();
 	}
 
-	// 產生諮商師列表
+	// 產生專業人員列表
 	_app.do_list = function(){
 
 		var cmd   = {};     
@@ -25,26 +25,35 @@ if(typeof app.contact == "undefined") app.contact = {};
 		
 		$.each(res, function(key, val){
 
-			// if(key=="gender" || key=="charges"){
-			// 	$("[contact="+key+"][value="+val+"]").prop("checked", true);
-			// }
-
-			// else 
 			if(key=="area" || key=="serviceobj" || key=="office_area" || key=="training" || key=="license"){
-				$("[contact="+key+"]").html(app.objTrans.obj_trans(val));
+				var data = app.objTrans.obj_trans(val);
+				$("[contact="+key+"]").html(data);
+				if(data=="" || data==undefined){
+					$("[contact="+key+"]").closest("div").hide();
+				}
 			}
 
 			else if(key=="specialty"){	
 				var data = JSON.parse(val);			
 				var checkbox = data["checkbox"];
-				var other    = data["other"];
+				var other    = data["other"];				
 
 				$("[contact="+key+"]").html(app.objTrans.obj_to_str(checkbox));
 				$("[contact=n_"+key+"]").html(other);
 			}
 
+			else if(key=="identity"){					
+				var data = res["identity_yes"];
+				if(val!="我是同志，我願意公開同志身份" || data==""){
+					$("[contact=identity_yes]").closest("div").hide();
+				}
+			}
+
 			else{
 				$("[contact="+key+"]").html(val);
+				if(val=="" || val==undefined){
+					$("[contact="+key+"]").closest("div").hide();
+				}
 			}
 		});
 	}

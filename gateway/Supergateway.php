@@ -32,7 +32,7 @@
 	       	require("gateway_manager.php");
 	        break;
 	    case 2:
-			# 諮商師	 
+			# 專業人員	 
 			require("gateway_counselor.php");      	
 	        break;
  		case 3:

@@ -191,6 +191,7 @@ function getType(_type){
 	ary["password"]     = "密碼";
 	ary["gender"]       = "性別";
 	ary["identity"]     = "專業人員同志身分";
+	ary["identity_yes"] = "同志身份";
 	ary["mobile"]       = "手機";
 	ary["phone"]        = "機構電話";
 	ary["email"]        = "E-mail";
@@ -201,7 +202,8 @@ function getType(_type){
 	ary["service_area"] = "可服務地點";
 	ary["serviceobj"]   = "可服務對象";
 	ary["serviceLimit"] = "服務對象限制";
-	ary["charges"]      = "收費標準";
+	ary["charges"]      = "是否收費";
+	ary["fee"]      	= "收費標準";
 	ary["seniority"]    = "年資";
 	ary["training"]     = "修課及訓練";
 	ary["experience"]   = "服務同志實務經歷";

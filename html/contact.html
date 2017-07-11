@@ -1,30 +1,32 @@
 <script src="js/contact.js"></script>
 <script src="js/check.js"></script>
 
-<main class="">	
+<main class="counselorWindow">	
 
 	<h1>我要諮商</h1>
 
-	<section class="counselorApply popUpContent">
-				
+	<section class="counselorApply counselorDetail popUpContent">
+		<h3>基本資料</h3>	
 		<div>			
 			<h4> 姓名 </h4>
 			<span contact="name"></span>
 		</div>			
 		
 		<div>			
-			<h4> 性別（認同）</h4>
-			<!-- <input type="radio" contact="gender" name="gender" value="男" disabled>男
-			<input type="radio" contact="gender" name="gender" value="女" disabled>女
-			<input type="radio" contact="gender" name="gender" value="其他" disabled>其他 -->
+			<h4> 性別</h4>		
 			<span contact="gender"></span>
 		</div>
 		
-		<div>			
-			<h4> 專業人員同志身分 (性傾向、性別認同或其他同志認同)</h4>
+		<!-- <div>
+			<h4> 如果您是同志，你會願意在資料身公開同志身份嗎？ </h4>
 			<span contact="identity"></span>
-		</div>		
+		</div> -->	
 
+		<div>			
+			<h4> 此專業人員為 </h4>
+			<span contact="identity_yes"></span>
+		</div>	
+		<h3>聯絡資料</h3>
 		<div>			
 			<h4> 手機 </h4>
 			<span contact="mobile"></span>
@@ -39,7 +41,7 @@
 			<h4> E-mail </h4>
 			<span contact="email"></span>
 		</div>
-
+		<h3>接案資訊</h3>
 		<div>
 			<h4> 服務地區 </h4>
 			<span contact="area"></span>			
@@ -56,12 +58,12 @@
 		</div>	
 
 		<div>
-			<h4> 職稱 </h4>
+			<h4> 服務單位/職稱 </h4>
 			<span contact="job"></span>
 		</div>
 
 		<div>
-			<h4> 可服務地點 </h4>
+			<h4> 可接案地點 </h4>
 			<span contact="service_area"></span>
 		</div>
 
@@ -71,22 +73,25 @@
 		</div>		
 
 		<div>
-			<h4> 服務對象限制 </h4>
+			<h4> 服務對象是否有任何限制 </h4>
 			<span contact="serviceLimit"></span>
 		</div>
 
 		<div>
-			<h4> 收費標準 </h4>
-			<!-- <input type="radio" contact="charges" name="charges" value="收費" disabled>收費
-			<input type="radio" contact="charges" name="charges" value="免費" disabled>免費 -->
+			<h4> 是否收費 </h4>
 			<span contact="charges"></span>
+		</div>
+
+		<div>
+			<h4> 收費標準 </h4>
+			<span contact="fee"></span>
 		</div>
 
 		<div>
 			<h4> 年資 </h4>
 			<span contact="seniority"></span>年
 		</div>
-
+		<h3>訓練背景</h3>
 		<div>
 			<h4> 修課及訓練 </h4>
 			<span contact="training"></span>			
@@ -123,7 +128,7 @@
 		</div>
 
 		<div>
-			<h4>一般專長</h4>
+			<h4>諮商輔導領域專長</h4>
 			<span contact="n_specialty"></span>
 		</div>
 

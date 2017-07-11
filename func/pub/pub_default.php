@@ -16,6 +16,8 @@
 	    	$data["office_area"] = DEF::sql_get_office_area_def();
 	    	$data["training"]    = DEF::sql_get_training_def();
 	    	$data["charges"]     = DEF::sql_get_charges_def();
+	    	$data["case_times"]  = DEF::sql_get_case_times_def();
+	    	$data["identity"]    = DEF::sql_get_identity_def();
 
 	    	return RTN::do_return("0","SUCCESS",$data);
 	    } 
@@ -211,6 +213,40 @@
 	    	$ary = array();
 	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {	    		
 				$ary[] = $row["charges"];
+			}			
+			if(count($ary)<=0){return false;}			
+			return $ary;
+	    }
+
+	    static function sql_get_case_times_def(){
+	    	$sql  = " select case_times";
+	    	$sql .= " from config_case_times";
+	    	$sql .= " where 1=1";
+
+	    	// echo $sql;
+
+	    	$result =  DB::SqlQuery($sql);
+	    	
+	    	$ary = array();
+	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {	    		
+				$ary[] = $row["case_times"];
+			}			
+			if(count($ary)<=0){return false;}			
+			return $ary;
+	    }
+
+	    static function sql_get_identity_def(){
+	    	$sql  = " select identity";
+	    	$sql .= " from config_identity";
+	    	$sql .= " where 1=1";
+
+	    	// echo $sql;
+
+	    	$result =  DB::SqlQuery($sql);
+	    	
+	    	$ary = array();
+	    	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {	    		
+				$ary[] = $row["identity"];
 			}			
 			if(count($ary)<=0){return false;}			
 			return $ary;

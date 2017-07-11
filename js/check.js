@@ -8,7 +8,8 @@ if(typeof app.check == "undefined") app.check = {};
 	_app.check_empty = function(type, val){		
 		var chk = (!val || val=="" || val==undefined)?false:true;
 		if(chk==false){			
-			app.popwin.popwin_errmsg(type+"不能空白");
+			// app.popwin.popwin_errmsg(type+"不能空白");
+			app.popwin.popwin_errmsg("請輸入"+type);
 		}
 		return chk;
 	}

@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="style/front.css">
-		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>		
+		<meta name=”viewport” content=”width=device-width, initial-scale=1.0″>
+		<script src="js/lib/jquery/jquery-1.11.2.min.js"></script>	
 		<title>同志諮商專業人員網</title>	
 		<script>var app = {};</script>
 	</head>

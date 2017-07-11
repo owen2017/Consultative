@@ -5,9 +5,9 @@
 	<aside class="side" ng-include="'html/side/side.html'"></aside>
 
 	<section class="main" ng-controller="counselorApply">
-		<h1>諮商師申請</h1>	
+		<h1>專業人員申請</h1>	
 		<select ng-model="status">
-			<option value="">狀態</option>
+			<!-- <option value="">狀態</option> -->
 			<option value="0">未審核</option>
 			<option value="1">核準</option>
 			<option value="2">拒絕</option>
@@ -19,7 +19,7 @@
 				<th>#</th>
 				<th>帳號</th>
 				<th>姓名</th>
-				<th>性別（認同)</th>				
+				<th>性別</th>				
 				<th>專業人員同志身分</th>				
 				<th>申請時間</th>
 				<th>狀態</th>
@@ -57,6 +57,10 @@
 				<tr>
 					<td>專業人員同志身分</td>
 					<td>{{ detail.identity }}</td>
+				</tr>
+				<tr>
+					<td>同志身份</td>
+					<td>{{ detail.identity_yes }}</td>
 				</tr>
 				<tr>
 					<td>手機</td>
@@ -99,8 +103,12 @@
 					<td>{{ detail.serviceLimit }}</td>
 				</tr>
 				<tr>
-					<td>收費標準</td>
+					<td>是否收費</td>
 					<td>{{ detail.charges }}</td>
+				</tr>
+				<tr>
+					<td>收費標準</td>
+					<td>{{ detail.fee }}</td>
 				</tr>
 				<tr>
 					<td>修課及訓練</td>

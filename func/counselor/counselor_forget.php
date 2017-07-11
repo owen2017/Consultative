@@ -1,27 +1,25 @@
 <?php
 	namespace func\counselor;
 	use RTN;
-	// use MAIL;
 	use CNL_SQL;
 	require_once('../func/pub/pub_mail.php');
 	class counselor_forget{    
 
 	    # 忘記密碼
 	    static function forget_password($_ARG){
-
 	    	$account = $_ARG["account"];   	
 	    	$email   = $_ARG["email"];   	
 
 			# 忘記密碼 - 依帳號取得信箱
 	    	$data = CNL_SQL::sql_get_email($account, $email);
-
+	    	
 	    	if($data==false){
-	    		# 沒有資料
-	    		return RTN::do_return("-1","ERR_NO_ACCOUNT","");
+	    		# 沒有這個專業人員
+	    		return RTN::do_return("-1","ERR_NO_COUNSELOR","");
 	    	}
 
 	    	if($data["email"] && $data["email"]!=$email){
-	    		# 沒有資料
+	    		# 信箱錯誤
 	    		return RTN::do_return("-1","ERR_ERROR_EMAIL","");
 	    	}
 

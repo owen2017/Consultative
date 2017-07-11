@@ -46,9 +46,16 @@ if(typeof app.login  == "undefined") app.login  = {};
 		cmd.captcha  = captcha;
 
 		var res = app.ajax.do_post(cmd);
+
+		var date = new Date();
+  		var time = date.getTime();
+
+		$("[login=captcha]").val("");
+		$("#captcha").attr("src", "Captcha/Captcha.php?"+time);
+		
 		if(res==false){ 
-			$("[login=captcha]").val("");
-			$("#captcha").attr("src", "Captcha/Captcha.php");
+			// $("[login=captcha]").val("");
+			// $("#captcha").attr("src", "Captcha/Captcha.php");
 			return; 
 		}
 		app.counselor = res;

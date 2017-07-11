@@ -9,7 +9,7 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 		// 設定預設資料
 		_app.set_default();
 
-		// 產生諮商師列表
+		// 產生專業人員列表
 		_app.do_list();
 
 		// 按鈕動作
@@ -20,18 +20,18 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 	_app.set_default = function(){
 
 		$.each(app.select.options, function(key, val){
-			_app.set_checkbox(key, val)
+			_app.set_sel_datas(key, val)
 		});		
 	}
 
 	// 設置checkbox
-	_app.set_checkbox = function(type, data){
+	_app.set_sel_datas = function(type, data){
 		var _this = $("[default="+type+"]");
 		if(!_this){ return; }
 
 		var br = (_this.attr("br")=="Y")?"<br>":"";
 
-		var _clone = _this.find("span").clone();
+		var _clone = _this.find("label").clone();
 		_clone.show();
 
 		var list = [];
@@ -46,12 +46,11 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 		_this.find("div").html(list.join(br));
 	}
 
-	// 產生諮商師列表
+	// 產生專業人員列表
 	_app.do_list = function(){	
-		console.log(app.counselor);	
 		$.each(app.counselor, function(key, val){
 
-			if(key=="gender" || key=="charges" || key=="idea1" || key=="idea2"){
+			if(key=="gender"|| key=="case_times" || key=="idea1" || key=="idea2"){
 				$("[signedIn="+key+"][value="+val+"]").prop("checked", true);
 			}
 
@@ -70,9 +69,22 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 				$.each(checkbox, function(__key, __val){
 					$("[chkbox="+key+"][value="+__val+"]").prop("checked", true);
 				});
-				if(data["checkbox"] && data["checkbox"]!=""){
+				if(other && other!=""){
 					$("[chkbox="+key+"][key=other]").prop("checked", true);
 					$("[other="+key+"]").val(other);
+				}
+			}
+			else if(key=="identity"){
+				$("[signedIn="+key+"][value="+val+"]").prop("checked", true);
+				if(val!="我是同志，我願意公開同志身份"){
+					$("[signedIn=identity_yes]").prop("disabled", true);
+				}
+			}
+
+			else if(key=="charges"){
+				$("[signedIn="+key+"][value="+val+"]").prop("checked", true);
+				if(val!="收費"){
+					$("[signedIn=fee]").prop("disabled", true);
 				}
 			}
 
@@ -85,22 +97,7 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 	// 按鈕動作
 	_app.btn_actions = function(){
 
-		// 修改按鈕(打開disabled)
-  		// $("[btn=do_update]").on("click",function(){
-  			
-  		// 	$("[signedIn]").prop("disabled", false);
-  		// 	$("[chkbox]").prop("disabled", false);
-  		// 	$("[other]").prop("disabled", false);
-
-  		// 	$("[signedIn=account]").prop("disabled", true);
-  		// 	$("[signedIn=name]").prop("disabled", true);  			
-  		// 	$("[signedIn=idea1]").prop("disabled", true);
-  		// 	$("[signedIn=idea2]").prop("disabled", true);
-
-  		// 	$("[upd=submit]").show();
-  		// }); 
-
-  		// 修改
+		// 修改
   		$("[btn=do_logout]").on("click",function(){
   			app.SID = "";
 			app.counselor = "";
@@ -124,16 +121,16 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 			cmd.cmd = "2,9";
 
 			
-			// 性別	收費標準	 	
-			if(type=="gender" || type=="charges"){							
+			// 性別
+			if(type=="gender" || type=="case_times"){							
 				data = $("[signedIn="+type+"]:checked").val();
 			}
 
-			// 專業人員同志身分 手機 	機構電話 E-mail 
+			//  手機 	機構電話 E-mail 
 			// 服務時段 職稱	可服務地點 服務對象限制  
 			// 年資 服務同志實務經歷 接案次數 學歷
 			// 證照證號 密碼
-			if(type=="password" || type=="identity" || type=="mobile" || type=="phone" || type=="email" || type=="office_time" || type=="job" || type=="service_area" || type=="serviceLimit" || type=="seniority" || type=="experience" || type=="case_times" || type=="education" || type=="license_num"){							
+			if(type=="password" || type=="mobile" || type=="phone" || type=="email" || type=="office_time" || type=="job" || type=="service_area" || type=="serviceLimit" || type=="seniority" || type=="experience"|| type=="education" || type=="license_num"){							
 				data = $("[signedIn="+type+"]").val();				
 			}
 
@@ -189,16 +186,37 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 					return;
 				}
 			}
+
+			if(data == app.counselor[type]){
+				return app.popwin.popwin_errmsg("修改資料，請填寫不同的內容");
+			}
+
+			// 專業人員同志身分 收費標準
+			if(type=="identity" || type=="charges"){
+				data = $("[signedIn="+type+"]:checked").val();
+
+				var type_1 = (type=="identity")?"identity_yes":"fee";
+				var data_1 = $("[signedIn="+type_1+"]").val();
+				if(data!="我是同志，我願意公開同志身份" && data!="收費"){
+					data_1="";
+				}
+				
+				if((data == app.counselor[type])&&(data_1 == app.counselor[type_1])){
+					return app.popwin.popwin_errmsg("修改資料，請填寫不同的內容");
+				}
+				
+			}
 			
 			// console.log(type);
 			// console.log(data);
 			// console.log(app.counselor[type]);
 			cmd["type"] = type;
 			cmd[type] = data;
-			if(data == app.counselor[type]){
-				return app.popwin.popwin_errmsg("修改資料，請填寫不同的內容");
-			}
 
+			cmd["type1"] = type_1;
+			cmd[type_1] = data_1;
+			
+			// return;
 			// alert(type+" = "+data);
 
 			cmd.sid = app.SID;
@@ -208,7 +226,29 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 			app.popwin.close_popwin_html();
 
   		}
+
+  		$("[name=charges]").on("change",function(){
+  			var val = $(this).attr("value");
+  			if(val=="收費"){
+  				$("[signedIn=fee]").prop("disabled",false);
+  			}else{
+  				$("[signedIn=fee]").val("");
+  				$("[signedIn=fee]").prop("disabled",true);
+  			}
+  		});
+
+  		$("[name=identity]").on("change",function(){
+  			var val = $(this).attr("value");
+  			if(val=="我是同志，我願意公開同志身份"){
+  				$("[signedIn=identity_yes]").prop("disabled",false);
+  			}else{
+  				$("[signedIn=identity_yes]").val("");
+  				$("[signedIn=identity_yes]").prop("disabled",true);
+  			}
+  		});
 	}
+
+
 
 }(app.signedIn));
 

@@ -17,6 +17,8 @@ define(['angular'], function (angular) {
 
 				if($scope.new_pwd!=$scope.new_pwd2){alert("新密碼不相同");return;}
 
+				if($scope.new_pwd == $scope.old_pwd){alert("請輸入不同的新舊密碼");return;}
+
 				cmd.old_pwd = $scope.old_pwd;
 				cmd.new_pwd = $scope.new_pwd;
 				cmd.sid = $routeParams.sid;

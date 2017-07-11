@@ -10,7 +10,7 @@ $(function(){
 	// SID
 	app.SID = "";
 
-	// 諮商師資料
+	// 專業人員資料
 	app.counselor = [];
 
 	// 網址參數
@@ -22,7 +22,7 @@ $(function(){
   	// 瀏覽次數
   	app.visitor.init();
 
-  	// 諮商師列表
+  	// 專業人員列表
   	app.search.init();
 
   	// 彈跳視窗

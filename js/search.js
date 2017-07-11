@@ -20,6 +20,10 @@ if(typeof app.search == "undefined") app.search = {};
 
 	// 取得諮商師資料
 	_app.get_search = function(){
+
+		$("[name=total_row]").closest("h3").hide();
+		$("[name=total_no_data]").hide();
+
 		var cmd   = {};     
 		cmd.cmd   = "2,16";
 		cmd.page = _app.page;
@@ -27,14 +31,51 @@ if(typeof app.search == "undefined") app.search = {};
 
 		// 主下拉式選單類型
 		var type = $("[name=main_sel]").val();
-		if(type=="name"){cmd.name = $("[sub_sel=name] input").val();}
-		if(type=="area"){cmd.area = $("[name=area_opts]").html();}
-		if(type=="specialty"){cmd.specialty = $("[sub_sel=specialty] select").val();}		
+		if(type=="all"){			
+			cmd.all = $("[sub_sel=all] input").val();
+		}
+		if(type=="name"){
+			cmd.name = $("[sub_sel=name] input").val();
+			if(cmd.name=="" || cmd.name==undefined){
+				app.popwin.popwin_errmsg("請輸入搜尋資料");
+				return;
+			}
+		}
+		if(type=="area"){
+			cmd.area = $("[name=area_opts]").html();
+			if(cmd.area=="" || cmd.area==undefined){
+				app.popwin.popwin_errmsg("請輸入搜尋資料");
+				return;
+			}
+		}
+		if(type=="specialty"){
+			cmd.specialty = $("[sub_sel=specialty] select").val();
+			if(cmd.specialty=="" || cmd.specialty==undefined){
+				app.popwin.popwin_errmsg("請輸入搜尋資料");
+				return;
+			}
+		}		
 
 		var res = app.ajax.do_post(cmd);
-		if(res==false){ return; }
-		_app.max_rows = res["count"];
-		_app.do_list(res["data"]);
+		if(res==false){ 
+			// 移除舊列表 
+  			$("[copy=Y]").remove();
+			return; 
+		}
+
+		var count = res["count"];
+		var data = res["data"];
+
+		_app.max_rows = count;		
+
+		if(count<=0){			
+			$("[name=total_no_data]").show();
+		}else{			
+			_app.do_list(data);
+			// 資料總筆數
+			$("[name=total_row]").html(_app.max_rows);
+			$("[name=total_row]").closest("h3").show();			
+		}
 	}	
 
 	// 產生列表
@@ -63,6 +104,8 @@ if(typeof app.search == "undefined") app.search = {};
 			
 			list.push(_li.prop("outerHTML"));
 		});
+
+		// 產生列表
 		$("[list=ul]").append(list.join(""));
 
 	}
@@ -84,8 +127,9 @@ if(typeof app.search == "undefined") app.search = {};
 	    });
 
   		// 搜尋按鈕
-  		$("[name=search]").off().on("click",function(){
-  			// 移除列表 
+  		$("[name=search]").on("click",function(){  			
+  			_app.page = 1;
+  			// 移除舊列表 
   			$("[copy=Y]").remove();
   			_app.get_search();
   		});  

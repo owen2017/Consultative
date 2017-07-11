@@ -53,7 +53,7 @@
 
 	    	$col_data = CNL_SQL::sql_get_list($cid, "", "", "", "", "", "", "");
 	    	if($col_data==false){
-	    		# 沒有這個諮商師
+	    		# 沒有這個專業人員
 	    		return RTN::do_return("-1","ERR_NO_COUNSELOR","");
 	    	}
 

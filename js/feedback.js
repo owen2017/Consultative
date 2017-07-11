@@ -42,8 +42,15 @@ if(typeof app.feedback == "undefined") app.feedback = {};
   		cmd.captcha = captcha;
 
   		var res = app.ajax.do_post(cmd);
-		if(res==false){ 
-			$("[feedback=captcha]").attr("src", "Captcha/Captcha.php");
+
+  		var date = new Date();
+  		var time = date.getTime();
+  		$("[feedback=captcha]").val("");
+		$("#captcha").attr("src", "Captcha/Captcha.php?"+time);
+
+		if(res==false){
+			// $("[feedback=captcha]").val("");
+			// $("#captcha").attr("src", "Captcha/Captcha.php");
 			return; 
 		}
 

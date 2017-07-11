@@ -5,7 +5,7 @@
 	<aside class="side" ng-include="'html/side/side.html'"></aside>
 
 	<section class="main" ng-controller="counselorModify">
-		<h1>諮商師修改申請</h1>		
+		<h1>專業人員修改申請</h1>		
 
 		<div>
 			<input type="text" ng-model="acc" placeholder="帳號">
@@ -34,8 +34,8 @@
 					<td>{{ $index + 1 }}</td>
 					<td>{{ value.account }}</td>
 					<td>{{ value.type }}</td>
-					<td ng-switch on="value.type">{{ value.oldData }}</td>
-					<td ng-switch on="value.type">{{ value.newData }}</td>
+					<td class="dataArticle" ng-switch on="value.type">{{ value.oldData }}</td>
+					<td class="dataArticle" ng-switch on="value.type">{{ value.newData }}</td>
 					<td ng-switch on="value.status">
 						<span ng-switch-when="0">未審核</span>
 						<span ng-switch-when="1">核準</span>

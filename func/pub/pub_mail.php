@@ -3,12 +3,15 @@
 	require_once '../swiftmailer/swift_required.php';	
 
 	# 寄信
-    function do_send_mail($_email, $_sender, $_title, $_content){	    	
+    function do_send_mail($_email, $_sender, $_title, $_content){
+    	
+    	$sender_account  = "TAS.LGBTcounselor@gmail.com";	    	
+    	$sender_password = "LGBTbravo2017";	    	
 
 	    // Create the Transport
 	    $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
-	      ->setUsername('owen1213945@gmail.com')
-	      ->setPassword('asdqazesz')
+	      ->setUsername($sender_account)
+	      ->setPassword($sender_password)
 	    ;
 
 	    // Create the Mailer using your created Transport
@@ -16,9 +19,8 @@
 
 	    // Create a message
 	    $message = new Swift_Message($_title);
-	    $message->setFrom(['owen1213945@gmail.com' => $_sender]);
-	    // $message->setTo(['a1213945@gmail.com', 'other@domain.org' => 'A name']);
-	    $message->setTo(['a1213945@gmail.com']);
+	    $message->setFrom([$sender_account => $_sender]);
+	    $message->setTo([$_email]);
 	    $message->setBody($_content);
 	      ;
 
@@ -26,5 +28,5 @@
 	    $result = $mailer->send($message);
     } 
 
-	
+   	
 ?>

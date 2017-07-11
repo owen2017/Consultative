@@ -14,14 +14,13 @@ if(typeof app.news == "undefined") app.news = {};
 		_app.get_news();
 		// 按鈕動作
 		_app.btn_actions();
-
-		$("[news=li]:eq(1) div").slideToggle();
 	}
 
 	// 取得最新消息
 	_app.get_news = function(){
 		var cmd   = {};     
 		cmd.cmd   = "4,1";
+		cmd.enable = "Y";
 		cmd.page = _app.page;
 		cmd.rows = _app.rows;
 		var res = app.ajax.do_post(cmd);
@@ -54,8 +53,8 @@ if(typeof app.news == "undefined") app.news = {};
 
 		// 彈窗 - 顯示詳細內容
   		$("[news=li]").on("click",function(){
-  			$("[news=content]").slideUp()
-  			$(this).find("[news=content]").slideToggle();  			
+  			$("[news=content]").stop().slideUp()
+  			$(this).find("[news=content]").stop().slideToggle();  			
   		}); 
 	}
 

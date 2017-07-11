@@ -7,17 +7,27 @@ if(typeof app.register == "undefined") app.register = {};
 	_app.init = function(){	
 
 		// 設定預設資料
-		_app.set_default();		
+		_app.set_default();	
 		// 按鈕動作
 		_app.btn_actions();
 	}
 
 	// 設定預設資料
 	_app.set_default = function(){
-		console.log(app.select.options);
+		// console.log(app.select.options);
 		$.each(app.select.options, function(key, val){
 			_app.set_sel_datas(key, val)
-		});		
+		});
+
+		$("[name=gender]").eq(1).prop("checked",true);
+		
+		$("[name=identity]").eq(1).prop("checked",true);
+		$("[apply=identity_yes]").prop("disabled",true);
+
+		$("[name=charges]").eq(1).prop("checked",true);
+		$("[apply=fee]").prop("disabled",true);
+
+		$("[name=case_times]").eq(1).prop("checked",true);
 	}
 
 	// 設置可選資料
@@ -27,7 +37,7 @@ if(typeof app.register == "undefined") app.register = {};
 		
 		var br = (_this.attr("br")=="Y")?"<br>":"";
 
-		var _clone = _this.find("span").clone();
+		var _clone = _this.find("label").clone();
 		_clone.show();
 
 		var list = [];
@@ -68,9 +78,12 @@ if(typeof app.register == "undefined") app.register = {};
 		// 密碼2
 		// ===================================================================
 		var password2 = $("[apply=password2]").val();
-		var chk_password2  = app.check.check_empty("相同密碼", password2);
+		var chk_password2  = app.check.check_empty("重複密碼", password2);
 		if(chk_password2==false){ return; }
-		// cmd.password2 = password2;
+		if(password!=password2){
+			app.popwin.popwin_errmsg("密碼與重複密碼必須相同");
+			return;
+		}
 
 		// ===================================================================
 		// 姓名
@@ -89,8 +102,16 @@ if(typeof app.register == "undefined") app.register = {};
 		// ===================================================================
 		// 專業人員同志身分
 		// ===================================================================
-		var identity = $("[apply=identity]").val();
+		var identity = $("[apply=identity]:checked").val();
 		cmd.identity = identity;
+
+		cmd.identity_yes = "";
+		var identity_yes = $("[apply=identity_yes]").val();		
+		if(identity=="我是同志，我願意公開同志身份"){
+			var chk_identity_yes  = app.check.check_empty("同志身份", identity_yes);
+			if(chk_identity_yes==false){ return; }
+			cmd.identity_yes = identity_yes;
+		};
 
 		// ===================================================================
 		// 手機
@@ -109,10 +130,11 @@ if(typeof app.register == "undefined") app.register = {};
 		// ===================================================================
 
 		var email = $("[apply=email]").val();
-		if(email!=""){			
-			var chk_email  = app.check.check_email("E-mail", email);
-			if(chk_email==false){ return; }
-		}
+		if(email==""){
+			app.popwin.popwin_errmsg("請輸入E-mail");
+		}			
+		var chk_email  = app.check.check_email("E-mail", email);
+		if(chk_email==false){ return; }		
 		cmd.email = email;
 
 		if(mobile=="" && phone=="" && email==""){
@@ -216,17 +238,19 @@ if(typeof app.register == "undefined") app.register = {};
 		cmd.serviceLimit = serviceLimit;
 
 		// ===================================================================
-		// 是否收費
-		// ===================================================================
-		var charges = $("[apply=charges]").val();
-		cmd.charges = charges;
-
-		// ===================================================================
 		// 收費標準
 		// ===================================================================
-		var fee = $("[apply=fee]").val();
-		cmd.fee = fee;
+		var charges = $("[apply=charges]:checked").val();
+		cmd.charges = charges;
 
+		cmd.fee = "";
+		var fee = $("[apply=fee]").val();		
+		if(charges=="收費"){
+			var chk_fee  = app.check.check_empty("收費標準", fee);
+			if(chk_fee==false){ return; }
+			cmd.fee = fee;
+		};
+		
 		// ===================================================================
 		// 年資
 		// ===================================================================
@@ -270,7 +294,7 @@ if(typeof app.register == "undefined") app.register = {};
 		// ===================================================================
 		// 接案次數
 		// ===================================================================
-		var case_times = $("[apply=case_times]").val();
+		var case_times = $("[apply=case_times]:checked").val();
 		cmd.case_times = case_times;
 
 		// ===================================================================
@@ -351,9 +375,6 @@ if(typeof app.register == "undefined") app.register = {};
 		var idea2 = $("[apply=idea2]:checked").val();
 		cmd.idea2 = idea2;
 
-		console.log(cmd);
-		return;		
-	
 		var res = app.ajax.do_post(cmd);
 		if(res==false){ return; }
 		app.popwin.popwin_errmsg("已收到申請，請等候通知");
@@ -367,6 +388,26 @@ if(typeof app.register == "undefined") app.register = {};
   		$("[register=do_register]").off().on("click",function(){
   			_app.do_register();			
   		}); 
+
+  		$("[name=charges]").on("change",function(){
+  			var val = $(this).attr("value");
+  			if(val=="收費"){
+  				$("[apply=fee]").prop("disabled",false);
+  			}else{
+  				$("[apply=fee]").val("");
+  				$("[apply=fee]").prop("disabled",true);
+  			}
+  		});
+
+  		$("[name=identity]").on("change",function(){
+  			var val = $(this).attr("value");
+  			if(val=="我是同志，我願意公開同志身份"){
+  				$("[apply=identity_yes]").prop("disabled",false);
+  			}else{
+  				$("[apply=identity_yes]").val("");
+  				$("[apply=identity_yes]").prop("disabled",true);
+  			}
+  		});
 	}
 
 }(app.register));

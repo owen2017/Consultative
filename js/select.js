@@ -21,6 +21,9 @@ if(typeof app.select == "undefined") app.select = {};
 		var res = app.ajax.do_post(cmd);
 		if(res==false){ return; }
 		_app.options = res;
+
+		// 預設搜尋全部
+		$("[sub_sel=all]").show();
 	}
 
 	// 主選單改變
@@ -33,6 +36,9 @@ if(typeof app.select == "undefined") app.select = {};
 
 		var _this = $("[sub_sel="+key+"]");
 		_this.show();
+
+		// 全部
+		if(key=="all"){_this.find("input").val("");}
 
 		// 姓名
 		if(key=="name"){_this.find("input").val("");}

@@ -12,15 +12,20 @@
 		<section class="search">
 
 			<select name="main_sel">
-				<option value="">分類</option>
+				<option value="all">全部</option>
 				<option value="name">姓名</option>
 				<option value="area">地區</option>
 				<option value="specialty">專長</option>
 			</select>
 
+			<!-- 全部 -->
+			<div sub_sel="all">
+				<input type="text" placeholder="請輸入搜尋條件">
+			</div>
+
 			<!-- 姓名 -->
 			<div sub_sel="name">
-				<input type="text" placeholder="請輸入諮商師姓名">
+				<input type="text" placeholder="請輸入專業人員姓名">
 			</div>
 
 			<!-- 地區 -->
@@ -55,7 +60,7 @@
 			<li popwin="login">我是專業人員</li>
 		</ul>
 	</nav>
-	
+	<div  class="showDataNum"><h3>目前呈現<a name="total_row"></a>筆資料</h3><h3 name="total_no_data" style="display:none;">查無資料，敬請重新設定搜尋條件。</h3></div>
 	<!-- 遮罩 -->
 	<div class="mask" name="mask"></div>
 
@@ -68,7 +73,7 @@
 		<div name="showHTML"></div>
 	</div>
 
-	<!-- 諮商師列表 -->
+	<!-- 專業人員列表 -->
 	<section class="list">
 		<ul list="ul">
 			<li list="li" style="display: none;"> <!-- style="display: none;" -->
@@ -83,14 +88,14 @@
 						<div class="bright" list="star"></div>
 						<b></b>
 						<input type="button" list="feeback" popwin="feedback" value="我要回饋" class="feedbackBtn">
-						<input type="button" list="contact" popwin="contact" value="我要諮商">
+						<input type="button" list="contact" popwin="contact" value="詳細資料">
 					</section>
 				</article>
 			</li>
 		</ul>
 	</section>
 
-	<div name="top" style="z-index: 10; display: block; bottom: 0px; width: 30px; height: 40px; position: absolute; right: 25px; cursor: pointer;">
-		Top
+	<div name="top" class="topBtn">
+		<span>⇪</span><h3>Top</h3>
 	</div>
 </main>

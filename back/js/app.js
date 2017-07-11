@@ -6,9 +6,9 @@ JsPath.push("errcode");         // 錯誤代碼
 JsPath.push("ajax");            // 資料傳輸
 JsPath.push("login");           // 登入
 JsPath.push("side");            // 測欄
-JsPath.push("counselorList");   // 諮商師列表
-JsPath.push("counselorApply");  // 諮商師申請
-JsPath.push("counselorModify"); // 諮商師修改
+JsPath.push("counselorList");   // 專業人員列表
+JsPath.push("counselorApply");  // 專業人員申請
+JsPath.push("counselorModify"); // 專業人員修改
 JsPath.push("feedback"); 		// 訪客回饋
 JsPath.push("editPwd");         // 修改密碼
 JsPath.push("bulletin");        // 公告

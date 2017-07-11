@@ -10,7 +10,7 @@
 	class counselor_modify{ 
 
 
-		# 修改諮商師資料
+		# 修改專業人員資料
 	    static function do_upd($_ARG){
 	    	$sn           = $_ARG["sn"];
 	    	$satisfaction = $_ARG["satisfaction"];
@@ -103,14 +103,17 @@
 	    static function add_modify_apply($_ARG){
 
 	    	$type    = $_ARG["type"];
-	    	$newData = $_ARG[$type];	 
+	    	$newData = $_ARG[$type];
 
+	    	$type1    = $_ARG["type1"];
+	    	$newData1 = $_ARG[$type1];
+	    	
 	    	$cid = SID::$MID;
 
 	    	$c_data = CNL_SQL::sql_get_list($cid, "", "", "", "", "", "", "");
 
 	    	if($c_data==false || count($c_data)<=0){
-	    		# 沒有這個諮商師
+	    		# 沒有這個專業人員
 	    		return RTN::do_return("-1","ERR_NO_COUNSELOR","");
 	    	}
 
@@ -119,6 +122,17 @@
 	    		# 資料修改正在審核中
 	    		return RTN::do_return("-1","ERR_DATA_IN_VERIFY","");
 	    	}
+
+	    	# 檢查第2資料
+	    	if($type1=="identity_yes" || $type1=="fee"){
+		    	$chk = CNL_SQL::sql_chk_modify_repeat($cid, $type1);
+		    	if($chk || $chk>=1){
+		    		# 資料修改正在審核中
+		    		return RTN::do_return("-1","ERR_DATA_IN_VERIFY","");
+		    	}
+	    	}
+
+
 
 	    	if($type=="mobile" || $type=="email" || $type=="address"){
 
@@ -147,39 +161,67 @@
 
 	    	$account = $c_data[0]["account"];
 	    	$oldData = $c_data[0][$type];
+	    	$oldData1 = $c_data[0][$type1];
+	    	
+	    	if($oldData!=$newData){	    		
+		    	$data = CNL_SQL::sql_ins_modify_apply($type, $account, $oldData, $newData, $cid);	    	
+		    	if($data==false){
+		    		# 新增失敗
+		    		return RTN::do_return("-1","ERR_ADD_FAIL","");
+		    	}
+	    	}
 
-	    	$data = CNL_SQL::sql_ins_modify_apply($type, $account, $oldData, $newData, $cid);	    	
-	    	if($data==false){
-	    		# 新增失敗
-	    		return RTN::do_return("-1","ERR_ADD_FAIL","");
-	    	}  	
+	    	if($oldData1!=$newData1 && ($type1=="identity_yes" || $type1=="fee")){
+		    	$data1 = CNL_SQL::sql_ins_modify_apply($type1, $account, $oldData1, $newData1, $cid);	    
+		    	if($data1==false){
+		    		# 新增失敗
+		    		return RTN::do_return("-1","ERR_ADD_FAIL","");
+		    	} 
+	    	}	    	   	
 
 	    	return RTN::do_return("0","SUCCESS",array());
 	    }
 
-	    # 後台修改諮商師資料
+	    # 後台修改專業人員資料
 	    static function back_do_modify($ARG){
 	    	
-	    	$sn     = $ARG["sn"];
-	    	$type   = $ARG["type"];
-	    	$modify = $ARG["modify"];
+	    	$sn      = $ARG["sn"];
+	    	$type    = $ARG["type"];
+	    	$modify  = $ARG["modify"];
+	    	$type1   = $ARG["type1"];
+	    	$modify1 = $ARG["modify1"];
 
 	    	$data = CNL_SQL::sql_get_list($sn, "", "", "", "", "", "", "");
 	    	if($data==false){
-	    		# 沒有這個諮商師	    		
+	    		# 沒有這個專業人員	    		
 	    		return RTN::do_return("-1","ERR_NO_COUNSELOR","");
 	    	} 
 
 	    	$counselor = $data[0];
 	    	$before = $data[0][$type];
+	    	$before1 = $data[0][$type1];
 
 	    	$upd = CNL_SQL::sql_do_upd_modify($sn, $type, $before, $modify);
-	    	if($upd==false){
-	    		# 修改失敗
-	    		return RTN::do_return("-1","ERR_UPD_MEM_FAIL","");
+	    	// if($upd==false){
+	    	// 	# 修改失敗
+	    	// 	return RTN::do_return("-1","ERR_UPD_MEM_FAIL","");
+	    	// }
+	    	$log = CNL_SQL::sql_log_back_changed($sn, $type, $before, $modify);
+
+
+	    	if($type=="identity" || $type=="charges"){
+	    		
+	    		if($before1!=$modify1){
+	    			$upd = CNL_SQL::sql_do_upd_modify($sn, $type1, $before1, $modify1);
+			    	// if($upd==false){
+			    	// 	# 修改失敗
+			    	// 	return RTN::do_return("-1","ERR_UPD_MEM_FAIL","");
+			    	// }
+			    	$log = CNL_SQL::sql_log_back_changed($sn, $type1, $before1, $modify1);
+	    		}    		
 	    	}
 
-	    	$log = CNL_SQL::sql_log_back_changed($sn, $type, $before, $modify);
+	    	
 	    	return RTN::do_return("0","SUCCESS",array());
 	    }
 
