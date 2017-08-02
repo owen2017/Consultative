@@ -224,7 +224,7 @@ obj_trans = function(obj){
 	if(_obj["checkbox"]){
 		var data = _obj["checkbox"];
 		var rtn = obj_to_str(data)
-		if(_obj["other"]!=""){
+		if(_obj["other"] && _obj["other"].length>0){
 			rtn += " , "+_obj["other"];
 		}
 	}else{

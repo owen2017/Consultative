@@ -31,4 +31,7 @@ $(function(){
   	// Top 功能
   	app.top.init();
 
+  	// 
+  	app.popwin.popwin_errmsg("建議使用瀏覽器 Chrome 、Firefox 、Safari 並請更新最新版本<br>若使用IE瀏覽器，由於框架限制，僅提供關鍵字搜尋");
+
 });

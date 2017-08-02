@@ -69,7 +69,8 @@ if(typeof app.signedIn == "undefined") app.signedIn = {};
 				$.each(checkbox, function(__key, __val){
 					$("[chkbox="+key+"][value="+__val+"]").prop("checked", true);
 				});
-				if(other && other!=""){
+
+				if(other && other.length>0){
 					$("[chkbox="+key+"][key=other]").prop("checked", true);
 					$("[other="+key+"]").val(other);
 				}

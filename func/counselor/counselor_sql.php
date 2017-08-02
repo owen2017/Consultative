@@ -418,6 +418,7 @@
 	    	if($_specialty!=""){
 	    		$sql .= " and specialty like '%".$_specialty."%'";
 	    	}
+	    	$sql .= " and enable ='Y'";
 
 	    	$sql .= " order by sn asc";
 
@@ -474,7 +475,8 @@
 	    	}
 	    	if($_specialty!=""){
 	    		$sql .= " and specialty like '%".$_specialty."%'";
-	    	}	    		    	
+	    	}
+	    	$sql .= " and enable ='Y'";
 
 	    	// $sql .= " order by sn asc";
 	    	

@@ -137,9 +137,9 @@
 				<tr ng-show="upd_gender" style="height: 100px;">
 					<td></td>
 					<td>
-						<span ng-repeat="(gender_key, gender_value) in default.gender">
-							<input type="radio" name="radio_gender" value="{{gender_value}}" ng-model="$parent.sel_gender">{{ gender_value }}
-						</span>
+						<label ng-repeat="(gender_key, gender_value) in default.gender">
+							<input type="radio" name="radio_gender" value="{{gender_value}}" ng-model="$parent.sel_gender"><span>{{ gender_value }}</span>
+						</label>
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'gender')" value="修改"></td>
 				</tr>
@@ -153,11 +153,11 @@
 				<tr ng-show="upd_identity" style="height: 100px;">
 					<td></td>
 					<td>
-						<span ng-repeat="(identity_key, identity_value) in default.identity">
-							<input type="radio" name="radio_identity" value="{{identity_value}}" ng-model="$parent.sel_identity">{{ identity_value }}							
-						</span>
+						<label ng-repeat="(identity_key, identity_value) in default.identity">
+							<input type="radio" name="radio_identity" value="{{identity_value}}" ng-model="$parent.sel_identity"><span>{{ identity_value }}</span>							
+						</label>
 						<br>
-						<input type="text" ng-model="updata_identity_yes">
+						請輸入您的同志傾向：<input type="text" ng-model="updata_identity_yes">
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'identity')" value="修改"></td>
 				</tr>
@@ -206,9 +206,9 @@
 				<tr ng-show="upd_area" style="height: 100px;">
 					<td></td>
 					<td class="dataArticle">
-						<span ng-repeat="(area_key, area_value) in default.area">
-							<input type="checkbox" value="{{area_value.city}}" ng-model="sel_area[area_value.city]" ng-change="upd_change()">{{ area_value.city }}
-						</span>
+						<label ng-repeat="(area_key, area_value) in default.area">
+							<input type="checkbox" value="{{area_value.city}}" ng-model="sel_area[area_value.city]" ng-change="upd_change()"><span>{{ area_value.city }}</span>
+						</label>
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'area')" value="修改"></td>
 				</tr>
@@ -234,12 +234,12 @@
 				<tr ng-show="upd_office_area" style="height: 100px;">
 					<td></td>
 					<td class="dataArticle">
-						<span ng-repeat="(office_area_key, office_area_value) in default.office_area">
-							<input type="checkbox" value="{{office_area_value}}" ng-model="sel_office_area[office_area_value]">{{ office_area_value }}
-						</span>
+						<label ng-repeat="(office_area_key, office_area_value) in default.office_area">
+							<input type="checkbox" value="{{office_area_value}}" ng-model="sel_office_area[office_area_value]"><span>{{ office_area_value }}</span>
+						</label>
 						<br>
 						<input type="checkbox" ng-model="sel_office_area.other">
-						<input type="text" ng-model="other_office_area">
+						<input type="text" ng-model="other_office_area" placeholder="其他">
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'office_area')" value="修改"></td>
 				</tr>
@@ -277,9 +277,9 @@
 				<tr ng-show="upd_serviceobj" style="height: 100px;">
 					<td></td>
 					<td class="dataArticle">
-						<span ng-repeat="(serviceobj_key, serviceobj_value) in default.serviceobj">
-							<input type="checkbox" value="{{serviceobj_value}}" ng-model="sel_serviceobj[serviceobj_value]">{{ serviceobj_value }}
-						</span>						
+						<label ng-repeat="(serviceobj_key, serviceobj_value) in default.serviceobj">
+							<input type="checkbox" value="{{serviceobj_value}}" ng-model="sel_serviceobj[serviceobj_value]"><span>{{ serviceobj_value }}</span>
+						</label>						
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'serviceobj')" value="修改"></td>
 				</tr>
@@ -305,9 +305,9 @@
 				<tr ng-show="upd_charges" style="height: 100px;">
 					<td></td>
 					<td>
-						<span ng-repeat="(charges_key, charges_value) in default.charges">
-							<input type="radio" name="radio_charges" value="{{charges_value}}" ng-model="$parent.sel_charges">{{ charges_value }}
-						</span>
+						<label ng-repeat="(charges_key, charges_value) in default.charges">
+							<input type="radio" name="radio_charges" value="{{charges_value}}" ng-model="$parent.sel_charges"><span>{{ charges_value }}</span>
+						</label>
 						<input type="text" ng-model="updata_fee">
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'charges')" value="修改"></td>
@@ -334,12 +334,12 @@
 				<tr ng-show="upd_training" style="height: 100px;">
 					<td></td>
 					<td class="dataArticle">
-						<span ng-repeat="(training_key, training_value) in default.training">
-							<input type="checkbox" value="{{training_value}}" ng-model="sel_training[training_value]">{{ training_value }}
+						<label ng-repeat="(training_key, training_value) in default.training">
+							<input type="checkbox" value="{{training_value}}" ng-model="sel_training[training_value]"><span>{{ training_value }}</span>
 							<br>
-						</span>
+						</label>
 						<input type="checkbox" ng-model="sel_training.other">
-						<input type="text" ng-model="other_training">
+						<input type="text" ng-model="other_training" placeholder="其他">
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'training')" value="修改"></td>
 				</tr>
@@ -365,9 +365,9 @@
 				<tr ng-show="upd_case_times" style="height: 100px;">
 					<td></td>
 					<td>
-						<span ng-repeat="(case_times_key, case_times_value) in default.case_times">
-							<input type="radio" name="radio_case_times" value="{{case_times_value}}" ng-model="$parent.sel_case_times">{{ case_times_value }}
-						</span>
+						<label ng-repeat="(case_times_key, case_times_value) in default.case_times">
+							<input type="radio" name="radio_case_times" value="{{case_times_value}}" ng-model="$parent.sel_case_times"><span>{{ case_times_value }}</span>
+						</label>
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'case_times')" value="修改"></td>
 				</tr>
@@ -392,12 +392,12 @@
 				<tr ng-show="upd_license" style="height: 100px;">
 					<td></td>
 					<td class="dataArticle">
-						<span ng-repeat="(license_key, license_value) in default.license">
-							<input type="checkbox" value="{{license_value}}" ng-model="sel_license[license_value]">{{ license_value }}
+						<label ng-repeat="(license_key, license_value) in default.license">
+							<input type="checkbox" value="{{license_value}}" ng-model="sel_license[license_value]"><span>{{ license_value }}</span>
 							<br>
-						</span>
+						</label>
 						<input type="checkbox" ng-model="sel_license.other">
-						<input type="text" ng-model="other_license">
+						<input type="text" ng-model="other_license" placeholder="其他">
 					</td>
 					<td><input type="button" ng-click="do_upd_counselor(detail.sn, 'license')" value="修改"></td>
 				</tr>
@@ -416,19 +416,32 @@
 
 
 				<tr>
-					<td>同志諮商領域專長</td>
-					<td>{{ detail.specialty.all }}</td>
+					<td>
+						同志諮商領域專長		
+						<br>
+						/
+						<br>	
+						一般專長			
+					</td>
+					<td>
+						{{ detail.specialty.def }}	
+						<br>
+						{{ detail.specialty.other }}						
+					</td>
 					<td><input type="button" ng-click="do_show_upd('specialty')" value="✎"></td>
 				</tr>
+				
 				<tr ng-show="upd_specialty" style="height: 100px;">
 					<td></td>
 					<td class="dataArticle">
-						<span ng-repeat="(specialty_key, specialty_value) in default.specialty">
-							<input type="checkbox" value="{{specialty_value}}" ng-model="sel_specialty[specialty_value]">{{ specialty_value }}
+						同志諮商領域專長 : 
+						<br>
+						<label ng-repeat="(specialty_key, specialty_value) in default.specialty">
+							<input type="checkbox" value="{{specialty_value}}" ng-model="sel_specialty[specialty_value]"><span>{{ specialty_value }}</span>
 							<br>
-						</span>
+						</label>
 						<!-- <input type="checkbox" style="float: left;" ng-model="sel_specialty.other"> -->
-						一般專長 :
+						一般專長:
 						<br>
 						<textarea cols="45" rows="3" ng-model="other_specialty"></textarea>
 					</td>

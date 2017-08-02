@@ -27,8 +27,9 @@
 	    static function edit_pwd($_ARG){
 	    	$old_pwd = $_ARG["old_pwd"];
 	    	$new_pwd = $_ARG["new_pwd"];
-
-	    	$data = MAG::sql_upd_pwd($old_pwd, $new_pwd);
+	    	$magId   = SID::$MID;
+ 
+	    	$data = MAG::sql_upd_pwd($magId, $old_pwd, $new_pwd);
 	    	if($data==false){return RTN::do_return("-1","ERR_UPD_ERROR","");}
 	    	return RTN::do_return("0","SUCCESS","SUCCESS");
 	    }
@@ -77,11 +78,12 @@
 	    }
 
 	    # 修改管理者密碼
-	    static function sql_upd_pwd($_old_pwd, $_new_pwd){
+	    static function sql_upd_pwd($_magId, $_old_pwd, $_new_pwd){
 
 	    	$sql  = " update manager set";
 	    	$sql .= " password ='".$_new_pwd."'";
-	    	$sql .= " where password='".$_old_pwd."'";
+	    	$sql .= " where sn='".$_magId."'";
+	    	$sql .= " and password='".$_old_pwd."'";
 	    	// echo $sql;
 
 	    	$result = DB::SqlQuery($sql);

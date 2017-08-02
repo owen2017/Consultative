@@ -11,7 +11,7 @@
 
 	    # 連線
 	    static function connection(){  
-	    	static::$link = mysqli_connect("127.0.0.1", "owen", "owen123", "owenDB") or die('connection');  
+	    	static::$link = mysqli_connect("127.0.0.1", "company", "1q2w3e4r", "company", "3306") or die('connection');  
 	    	mysqli_set_charset(static::$link,"utf8");
 	    }
 

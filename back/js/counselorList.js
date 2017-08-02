@@ -120,6 +120,7 @@ define(['angular'], function (angular) {
 			    		}
 			    		
 			    	  	$scope.list = data["data"];	
+			    	  	// console.log($scope.list );
 			    	  	$scope.pages = Math.ceil(data["count"] / $scope.rows);			    	  	
 			    	  	$scope.show_pag_tag($scope.pages);
 			    	  	$scope.nodata = false;
@@ -450,7 +451,7 @@ define(['angular'], function (angular) {
 					rtn["def"] = $scope.obj_to_str(data);
 					rtn["all"] = rtn["def"];
 					rtn["other"] = "";
-					if(_obj["other"]!=""){
+					if(_obj["other"] && _obj["other"].length>0){					
 						rtn["other"] = _obj["other"];
 						rtn["all"] += " , "+_obj["other"];
 					}

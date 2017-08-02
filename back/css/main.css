@@ -7,7 +7,7 @@ body {
     outline: none; }
   body select, body input, body button, body textarea {
     border-color: transparent;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
     color: white;
     padding: 0 14px;
     font-size: 14px;
@@ -15,6 +15,7 @@ body {
   body select {
     width: 179px;
     height: 47px;
+    -webkit-appearance: none;
     background: url(../../img/select.png) no-repeat;
     background-position: 90% top;
     cursor: pointer; }
@@ -222,11 +223,12 @@ main {
           line-height: 30px;
           min-height: 30px;
           text-align: center;
-          white-space: nowrap;
-          vertical-align: middle; }
+          /*white-space: nowrap;*/
+          vertical-align: middle;
+          font-size: 16px; }
         main section.main table.listObject tr td.dataArticle {
           white-space: normal;
-          word-wrap: break-word;
+          word-break: break-word;
           text-align: left; }
         main section.main table.listObject tr td a.feedbackBtn {
           display: block;
@@ -244,10 +246,11 @@ main {
         main section.main table.listObject tr:nth-child(even) {
           background-color: #eee; }
         main section.main table.listObject tr:nth-child(n+2) {
-          color: #011c0a; }
-          main section.main table.listObject tr:nth-child(n+2):hover {
-            background-color: #ed1d79;
-            color: white; }
+          color: #011c0a;
+          /*&:hover{
+          	background-color:$pinkColor;
+          	color:white;
+          }*/ }
           main section.main table.listObject tr:nth-child(n+2)[ng-show="nodata"] {
             pointer-events: none; }
         main section.main table.listObject tr:nth-child(1) {

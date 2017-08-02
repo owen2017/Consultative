@@ -7,7 +7,7 @@ if(typeof app.news == "undefined") app.news = {};
 	// 頁數
 	_app.page = 1;
 	// 頁數
-	_app.rows = 5;
+	_app.rows = 30;
 
 	_app.init = function(){
 		// 取得最新消息
