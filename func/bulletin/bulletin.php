@@ -33,6 +33,9 @@
 	    	$enable     = $_ARG["enable"];
 	    	$remark     = $_ARG["remark"];
 
+	    	$title   = str_replace( "'", "''", $title);
+	    	$content = str_replace( "'", "''", $content);
+
 	    	$sn = BB::sql_add_bulletin($title, $content, $enable, $remark);
 	    	if($sn <= 0){
 	    		# 新增公告失敗
@@ -50,6 +53,9 @@
 	    	$content = $_ARG["content"];
 	    	$enable  = $_ARG["enable"];
 	    	$remark  = $_ARG["remark"];
+
+	    	$title   = str_replace( "'", "''", $title);
+	    	$content = str_replace( "'", "''", $content);
 
 	    	$_sn = BB::sql_upd_bulletin($sn, $title, $content, $enable, $remark);
 	    	if($_sn <= 0){
