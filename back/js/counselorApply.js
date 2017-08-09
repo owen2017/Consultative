@@ -34,11 +34,11 @@ define(['angular'], function (angular) {
 					
 			    	if(data!=false){
 			    		var count = data["data"].length;
-			    		for(var i=0 ; i<count ; i++){		
-			    			data["data"][i]["area"]        = $scope.obj_trans(data["data"][i]["area"]);			    			
+			    		for(var i=0 ; i<count ; i++){	
+			    			data["data"][i]["area"]        = $scope.obj_trans(data["data"][i]["area"]);
 			    			data["data"][i]["office_area"] = $scope.obj_trans(data["data"][i]["office_area"]);
-			    			data["data"][i]["serviceobj"]  = $scope.obj_trans(data["data"][i]["serviceobj"]);			    			
-			    			data["data"][i]["training"]    = $scope.obj_trans(data["data"][i]["training"]);			    			
+			    			data["data"][i]["serviceobj"]  = $scope.obj_trans(data["data"][i]["serviceobj"]);
+			    			data["data"][i]["training"]    = $scope.obj_trans(data["data"][i]["training"]);	
 			    			data["data"][i]["license"]     = $scope.obj_trans(data["data"][i]["license"]);
 			    			data["data"][i]["specialty"]   = $scope.obj_trans(data["data"][i]["specialty"]);
 			    		}

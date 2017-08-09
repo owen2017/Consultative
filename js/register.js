@@ -360,7 +360,12 @@ if(typeof app.register == "undefined") app.register = {};
 		}
 		
 		var specialty = $("[other=specialty]").val();
-		cmd["specialty"]["other"] = specialty;
+		
+		var spl = specialty.split('\n');
+		var _specialty = spl.join(' , ');
+
+		cmd["specialty"]["other"] = _specialty;
+
 		cmd["specialty"] = JSON.stringify(cmd["specialty"]);
 
 		// ===================================================================
