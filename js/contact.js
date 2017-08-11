@@ -22,7 +22,7 @@ if(typeof app.contact == "undefined") app.contact = {};
 
 		var res = app.ajax.do_post(cmd);
 		if(res==false){ return; }
-		
+
 		$.each(res, function(key, val){
 
 			if(key=="area" || key=="serviceobj" || key=="office_area" || key=="training" || key=="license"){
@@ -40,6 +40,9 @@ if(typeof app.contact == "undefined") app.contact = {};
 
 				$("[contact="+key+"]").html(app.objTrans.obj_to_str(checkbox));
 				$("[contact=n_"+key+"]").html(other);
+				if(other=="" || other==undefined){
+					$("[contact=n_"+key+"]").closest("div").hide();
+				}
 			}
 
 			else if(key=="identity"){					
