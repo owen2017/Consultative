@@ -198,12 +198,21 @@ define(['angular'], function (angular) {
 
 			// 顯示詳細內容
 			$scope.pop_detail = function(_index){
+				$scope.detail = "";
 				$scope.detail = $scope.list[_index];
+
+				var _identity_yes = $scope.list[_index]["identity_yes"];
+				var _identity = $scope.list[_index]["identity"];
+				$scope.detail._identity = _identity;
+
+				if(_identity_yes!="" && _identity_yes!=undefined && _identity.indexOf('(')===-1){
+					$scope.detail._identity += " ( "+_identity_yes+" )";
+				}	
 				
 				$scope.updata_name         = $scope.list[_index]["name"];
 				$scope.updata_password     = $scope.list[_index]["password"];
 				$scope.updata_gender       = $scope.list[_index]["gender"];
-				$scope.updata_identity     = $scope.list[_index]["identity"];
+				$scope.updata_identity     = $scope.list[_index]["identity"];							
 				$scope.updata_identity_yes = $scope.list[_index]["identity_yes"];
 				$scope.updata_mobile       = $scope.list[_index]["mobile"];
 				$scope.updata_phone        = $scope.list[_index]["phone"];
@@ -448,12 +457,13 @@ define(['angular'], function (angular) {
 				if(_obj["checkbox"]){
 					var data = _obj["checkbox"];					
 					var rtn = {};
-					rtn["def"] = $scope.obj_to_str(data);
-					rtn["all"] = rtn["def"];
+					rtn["def"] = $scope.obj_to_str(data);									
+					rtn["all"] = (rtn["def"]===undefined)?"":rtn["def"]+",";
 					rtn["other"] = "";
+					
 					if(_obj["other"] && _obj["other"].length>0){					
 						rtn["other"] = _obj["other"];
-						rtn["all"] += " , "+_obj["other"];
+						rtn["all"] += _obj["other"];
 					}
 				}else{
 					var data = _obj;
@@ -480,7 +490,7 @@ define(['angular'], function (angular) {
 			        if (obj.hasOwnProperty(key)) size++;
 			    }
 	    		return size;
-			};
+			};			
 
 		}])
 		

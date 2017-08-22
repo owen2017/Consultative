@@ -196,11 +196,15 @@ define(['angular'], function (angular) {
 				var _obj = JSON.parse(obj);
 				
 				if(_obj["checkbox"]){
-					var data = _obj["checkbox"];
-					var rtn = $scope.obj_to_str(data)
-					if(_obj["other"]!=""){
-						rtn += " , "+_obj["other"];
+					var data = _obj["checkbox"];			
+					var rtn = "";
+					if(Object.isEmpty(data)===false){					
+						rtn = $scope.obj_to_str(data);
+						if(_obj["other"]!=""){
+							rtn += " , ";
+						}
 					}
+					rtn += _obj["other"];
 				}else{
 					var data = _obj;
 					var rtn = $scope.obj_to_str(data);
@@ -226,6 +230,13 @@ define(['angular'], function (angular) {
 			        if (obj.hasOwnProperty(key)) size++;
 			    }
 	    		return size;
+			};
+			
+			Object.isEmpty = function(obj) { 
+				for (var key in obj) { 
+					return false; 
+				} 
+				return true; 
 			};
 
 

@@ -134,7 +134,7 @@
 
 
 
-	    	if($type=="mobile" || $type=="email" || $type=="address"){
+	    	if(($type=="mobile" || $type=="email" || $type=="address") && $newData!=""){
 
 		    	$_chk = CNL_SQL::sql_chk_counselor($type,$newData);
 

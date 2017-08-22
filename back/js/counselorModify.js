@@ -222,11 +222,15 @@ obj_trans = function(obj){
 	var _obj = JSON.parse(obj);
 	
 	if(_obj["checkbox"]){
-		var data = _obj["checkbox"];
-		var rtn = obj_to_str(data)
-		if(_obj["other"] && _obj["other"].length>0){
-			rtn += " , "+_obj["other"];
+		var data = _obj["checkbox"];			
+		var rtn = "";
+		if(Object.isEmpty(data)===false){					
+			rtn = obj_to_str(data);
+			if(_obj["other"]!=""){
+				rtn += " , ";
+			}
 		}
+		rtn += _obj["other"];
 	}else{
 		var data = _obj;
 		var rtn = obj_to_str(data);
@@ -252,6 +256,13 @@ Object.size = function(obj) {
         if (obj.hasOwnProperty(key)) size++;
     }
 	return size;
+};
+
+Object.isEmpty = function(obj) { 
+	for (var key in obj) { 
+		return false; 
+	} 
+	return true; 
 };
 
 obj_trans_specialty = function(obj){
